@@ -61,7 +61,9 @@
                             <p class="text-danger fst-italic">{{ $errors->first('TxtConfi') }}</p>
                     @endif
                         <button type="submit" class="btn btn-danger">Guardar Usuario</button>
-
+                        <div class="text-center p-3">
+                            <a clas="text-black" href="/">Iniciar sesion</a>
+                        </div>
                     </div>
                 </div>
             </form>

@@ -28,8 +28,8 @@ class VistaSingUp extends FormRequest
         "TxtApellido"=>"required",
         "TxtUsuario"=>"required",
         "TxtE-mail"=>"required|email",
-        "TxtContraseña"=>"required",
-        "TxtConfi"=>"required"
+        "TxtContraseña"=>"required|min:8",
+        "TxtConfi"=>"required|min:8"
         ];
     }
     public function messages()
@@ -40,8 +40,10 @@ class VistaSingUp extends FormRequest
             "TxtUsuario.required"=>"El Nombre de usuario es requerido",
             "TxtE-mail.required"=>"El E-mail es requerido",
             "TxtContraseña.required"=>"La contraseña es requerida",
+            "TxtContraseña.min"=>"Solo se aceptan máximo 8 caracteres",
             "TxtE-mail.email" => "Solo se acepta formato e-mail",
-
+            "TxtConfi.required"=>"La confirmacion es obligatoria",
+            "TxtConfi.min"=>"Solo se aceptan máximo 8 caracteres",
         ];
     }
 }
