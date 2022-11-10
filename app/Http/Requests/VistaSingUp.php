@@ -38,7 +38,7 @@ class VistaSingUp extends FormRequest
             "TxtNombre.required" =>"El nombre es requerido",
             "TxtApellido.required"=>"El apellido es requerido",
             "TxtUsuario.required"=>"El Nombre de usuario es requerido",
-            "TxtE-mail.required|email"=>"El E-mail es requerido",
+            "TxtE-mail.required"=>"El E-mail es requerido",
             "TxtContraseña.required"=>"La contraseña es requerida",
             "TxtE-mail.email" => "Solo se acepta formato e-mail",
 

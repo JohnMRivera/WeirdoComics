@@ -27,7 +27,7 @@
             @endif
 
                 <div class="card-footer text-muted">
-                    <button type="submit" class="btn btn-danger">Entrar</button>
+                    <button type="button" class="btn btn-danger">Entrar</button>
                 </div>
                 <div class="text-center p-3">
                     Si no estas registrado

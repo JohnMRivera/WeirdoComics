@@ -16,39 +16,38 @@
             <form method="post" action="guardarRegistro">
                 @csrf
                 <div class="card-body">
-
-
                     <div class="form-floating mb-3 m-sm-2">
-                        <input type="text" class="form-control" id="floatingInput" name="TxtNombre" placeholder="text">
-                        <label for="floatingInput">Nombre</label>
+                        <input type="text" class="form-control" value="{{ old('TxtNombre') }}" id="floatingInput" name="TxtNombre" placeholder="text">
+                        <label for="floatingInput">Nombres</label>
                       </div>
                     @if ($errors->all())
                             <p class="text-danger fst-italic">{{ $errors->first('TxtNombre') }}</p>
                     @endif
 
+
                     <div class="form-floating mb-3 m-sm-2">
-                        <input type="text" class="form-control" id="floatingInput" name="TxtApellido" placeholder="text">
-                        <label for="floatingInput">Apellido</label>
+                        <input type="text" class="form-control" value="{{ old('TxtApellido') }}" id="floatingInput" name="TxtApellido" placeholder="text">
+                        <label for="floatingInput">Apellidos</label>
                       </div>
                     @if ($errors->all())
                             <p class="text-danger fst-italic">{{ $errors->first('TxtApellido') }}</p>
                     @endif
                     <div class="form-floating mb-3 m-sm-2">
-                        <input type="text" class="form-control" id="floatingInput" name="TxtUsuario" placeholder="text">
+                        <input type="text" class="form-control" value="{{ old('TxtUsuario') }}" id="floatingInput" name="TxtUsuario" placeholder="text">
                         <label for="floatingInput">Nombre de Usuario</label>
                       </div>
                     @if ($errors->all())
                             <p class="text-danger fst-italic">{{ $errors->first('TxtUsuario') }}</p>
                     @endif
                     <div class="form-floating mb-3 m-sm-2">
-                        <input type="text" class="form-control" id="floatingInput" name="TxtE-mail" placeholder="text">
+                        <input type="text" class="form-control" value="{{ old('TxtE-mail') }}" id="floatingInput" name="TxtE-mail" placeholder="text">
                         <label for="floatingInput">E-mail</label>
                       </div>
                     @if ($errors->all())
                             <p class="text-danger fst-italic">{{ $errors->first('TxtE-mail') }}</p>
                     @endif
                     <div class="form-floating mb-3 m-sm-2">
-                        <input type="password" class="form-control" id="floatingInput" name="TxtContraseña" placeholder="text">
+                        <input type="password" class="form-control"  id="floatingInput" name="TxtContraseña" placeholder="text">
                         <label for="floatingInput">Contraseña</label>
                       </div>
                     @if ($errors->all())
@@ -66,6 +65,5 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
+     </div>
 @stop

@@ -29,6 +29,7 @@ Route::controller(ControladorVistas::class)->group(function(){
     Route::get('registro_comics','vistaRegistroC')->name('regc');
     Route::get('ventas_mostrador','vistaVentasM')->name('venm');
     Route::get('singup','VistaSingUp')->name('Up');
+
 });
 Route::post('guardarRegistro',[ControladorVistas::class,'ProcesarRegistro'])->name('Sing');
 
