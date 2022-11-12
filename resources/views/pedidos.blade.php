@@ -40,6 +40,45 @@
         })
     </script>
 
+@elseif(session()->has('generar_pedido'))
+
+    <script>
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+          title: 'Estas seguro?',
+        //   text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si, Generar Pedido!',
+          cancelButtonText: 'No, cancelar!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            swalWithBootstrapButtons.fire(
+              'Generado!',
+              'Tu pedido ha sido genrado.',
+              'success'
+            )
+          } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            swalWithBootstrapButtons.fire(
+              'Cancelado',
+              'El pedido ha sido cancelado :)',
+              'error'
+            )
+          }
+        })
+    </script>
+
 @endif
 
     <main class="main-pedidos">
@@ -63,7 +102,8 @@
                     </div>
                 </header>
             </form>
-            <div class="contenido-pedidos">
+            <form class="contenido-pedidos" action=" {{ route('gen_ped') }} " method="post">
+                @csrf
                 <header class="contenido-pedidos__header">
                     <div class="c-p__header-foto">
                         <img src="img/siu.png" alt="">
@@ -85,7 +125,6 @@
                         <label for="">Precio</label>    
                     </div>
                 </div>
-                
                     <div class="contenido-pedidos__scroll">
                         @for($i = 1; $i <= 12; $i++)
                         <div class="contenido-pedidos__articulos">
@@ -113,12 +152,10 @@
                         <label for="">$6000</label>
                     </div>
                     <div class="c-p__footer-generar">
-                        
-                            <button type="submit"> <a href=" http://weirdocomics.test/generar_pedido ">Generar Pedido</a> </button>
-                        
+                            <button> <a>Generar Pedido</a> </button>
                     </div>
                 </footer>
-            </div>
+            </form>
         </div>
         <div class="fondo-pedidos"></div>
     </main>

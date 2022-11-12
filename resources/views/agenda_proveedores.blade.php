@@ -1,9 +1,5 @@
 @extends('layouts.plantilla')
 
-@section('diseño')
-<link rel="stylesheet" href="estilos/estilos.css">
-@endsection
-
 @section('contenido')
 
 @if(session()->has('eliminar_proveedor'))
