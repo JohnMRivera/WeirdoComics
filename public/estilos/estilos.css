@@ -4,7 +4,7 @@
 }
 
 body{
-    background-color: rgb(40, 40, 40);
+    background-color: white;
     margin: 0;
 }
 
@@ -277,7 +277,7 @@ ul {
 }
 
 .contenido-scroll::-webkit-scrollbar-thumb:hover{
-    border: 0 0 10px orangered;
+    box-shadow: 0 0 5px orangered;
 }
 
 .contenido-proveedores {
@@ -345,8 +345,8 @@ ul {
 }
 
 .form-pedidos{
-    margin: 20px 5%;
-    width: 90%;
+    margin: 20px 5% 20px 0;
+    width: 95%;
     /* border: 3px solid black; */
     /* padding: 10px 5%; */
     /* overflow-y: scroll; */
@@ -358,7 +358,8 @@ ul {
 .header-pedidos{
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
-    height: 50%;
+    height: 55%;
+    padding: 0 20%;
 }
 
 .header-pedidos__titulo{
@@ -376,13 +377,16 @@ ul {
 
 
 .header-pedidos__buscador {
-    margin: 10px 20px;
-    text-align: center;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .header-pedidos__buscador input {
     margin: 1px 0 0;
-    width: 80%;
+    width: 90%;
+    /* margin: 0 2%; */
     height: 39px;
     padding: 0 10px;
     font-size: 18px;
@@ -392,7 +396,8 @@ ul {
 
 .header-pedidos__buscador input:hover {
     box-shadow: 0 0 3px black;
-    width: 82%;
+    width: 92%;
+    /* margin: 0; */
 }
 
 .header-pedidos__btn{
@@ -401,13 +406,14 @@ ul {
     justify-content: center; */
     float: right;
     /* right: 0; */
+    margin: 10px 0;
 }
 
 .header-pedidos__btn input{
     width: 40%;
     padding: 10px 0;
     float: right;
-    margin: 0 40px;
+    margin: 10px 40px;
     border: none;
     border-radius: 5px;
     color: white;
@@ -489,7 +495,7 @@ ul {
 }
 
 .contenido-pedidos__scroll::-webkit-scrollbar-thumb:hover{
-    border: 0 0 10px orangered;
+    box-shadow: 0 0 5px orangered;
 }
 
 .c-p__articulos-datos{
@@ -609,211 +615,285 @@ ul {
 }
 
 .alert{
-    padding: 10px;
-    width: 80%;
-    margin: 0 8% 25px;
+    /* padding: 10px; */
+    width: calc(100% - 6px);
     background-color: rgba(255, 0, 0, 0.5);
     border: 3px solid red;
     border-radius: 5px;
-}
-
-.alert{
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Arial;
+    margin: 10px 0;
 }
 
-/* Registro articulos
-.form-articulos{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+/* Login */
+
+.main-login{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     background-color: white;
-    padding: 2%;
-    background: url('/img/Fondo.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.form-proveedores{
-    background-color: white;
-    padding: 2%;
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    background: url('/img/Fondo6.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
-
-}
-.titulo-pro{
-    text-align: center;
-    margin-bottom: 1%;
-}
-.comics{
-    margin-top: 0.5%;
-}
-img{
-    border: 10px;
-    width: 30%;
-}
-.imgComics{
-    width: 27%;
-}
-.cont-form{
-    padding: 4%;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid rgb(0, 0, 0);
-    background-color: white;
-}
-/* .color-form{
-    background-color: rgba(255, 68, 0, 0.05);
-} */
-.form-borde{
-    border: 5px solid rgb(0, 0, 0);
-}
-.form-borde:hover{
-    box-shadow: 0 0 10px orangered;
-}
-.cont-boton-arti{
-    display: flex;
-    justify-content: end;
-}
-input:hover{
-    box-shadow: 0 0 10px orangered;
-}
-.btn-comic{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-.boton-arti{
-    height: 45px;
-    width: 190px;
-}
-.inputs-articulos{
-    width: 500px;
-}
-.p{
-    text-align: left;
-}
-
-/* Vista tienda */
-
-.cont-tienda{
-    padding: 2%;
-    padding-right: 0%;
-    background: url('/img/Fondo5.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-}
-.img-card{
-    height: 450px;
-}
-.card{
-    width: 90%;
-}
-#card-color{
-    color: white;
-    background-color: rgb(56, 56, 56);
-}
-.tienda-selec{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between
-}
-.icon-a{
-    margin-left: 35%;
-}
-
-.img-tienda{
-    width: 70px;
-}
-.icono{
-    display: flex;
-    justify-content: end;
-    padding-right: 4%;
-    position: relative;
-}
-/* vista carrito */
-.cont-carrito{
     width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: auto;
-    padding-top: 1%;
-    background: url('/img/Fondo6.jpeg');
+    height: 100vh;
 }
-.form-carrito{
-    width: 75%;
-    height: 100%;
-    margin: auto;
-    margin-top: 1%;
-    margin-bottom: 2%;
-    background-color: rgb(72, 72, 72);
-    display: flex;
-    flex-direction: column;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 1%;
-    color: white;
-}
-.cont-info{
-    width: 100%;
-    margin-bottom: 2%;
-}
-.rectangulo{
-    width: 100%;
-    height: 350px;
-    margin-bottom: 2%;
-    background-color: white;
-}
-.rectangulo:hover{
-    box-shadow: 0 0 10px orangered;
-}
-.h1{
-    margin: auto;
-    color: rgb(221, 122, 8);
-}
-.cont-labels{
-    display: flex;
-    justify-content: space-between;
-    font-size: 300%;
-    margin-bottom: 2%;
-}
-.btn-carrito{
-    height: 80%;
-    width: 200px;
-}
-/* Menu */
 
-.cont-menu{
-    background: url('/img/Fondo5.jpeg');
-    text-align: center;
-    padding-top: 3%;
+.contenido-login{
+    display: grid;
+    grid-template-rows: 1fr 7fr 1fr;
+    height: 100vh;
+    padding: 0 5%;
+}
+
+.header-login{
     display: flex;
-    flex-direction: column;
+    padding: 2%;
+    /* justify-content: center; */
+    align-items: center;
+    height: 10vh;
 }
-.cont-img-menu{
-    margin-top: 2%;
-    margin-bottom: 2%;
-}
-.titulo-menu{
-    font-size: 80px;
+
+.header-login h1{
     color: orangered;
+    font-family: Arial;
+    font-weight: 600;
 }
-.text{
-    color:rgb(255, 255, 255);
+
+.form-login{
+    /* border: 3px solid black; */
+    margin: 0 5%;
+    height: 70vh;
+    display: grid;
+    grid-template-rows: 2fr 8fr 2fr;
 }
-.cont-text-menu{
-    margin-bottom: 5%;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    background-color: rgba(0, 0, 0, 0.354);
+
+.titulo-login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial;
+    font-weight: 600;
+    /* height: 50px; */
+}
+
+.datos-login{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    padding: 5px 10%;
+    /* height: calc(100% - 24px); */
+}
+
+.datos-login div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+    /* height: 50%; */
+    /* position: relative; */
+    /* overflow: hidden; */
+}
+
+.datos-login div input{
+    width: 100%;
+    height: 100%;
+    border: 3px solid black;
+    padding: 5px 15px;
+    margin: 2px;
+    transition: 0.3s;
+    font-size: 20px;
+    /* background: none; */
+    /* color: black; */
+    margin: 2px;
+    /* border: none; */
+    /* outline: 0; */
+}
+/* .datos-login div input {
+    width: 80%;
+    height: 100%;
+    font-size: 20px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+    border-image: initial;
+    padding: 5px 15px;
+    margin: 2px;
+    transition: all 0.3s ease 0s;
 } */
+/* .datos-login div{
+    width: 100%;
+    height: 50px;
+    max-width: 400px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.datos-login div input{
+    width: 100%;
+    height: 100%;
+    background: none;
+    color: black;
+    padding: 10px;
+    border: none;
+    outline: 0;
+}
+
+.datos-login div .lbl-usuario{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid orangered;
+}
+
+.datos-login div .lbl-usuario:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 80%;
+    height: 100%;
+    border-bottom: 3px solid black;
+    transform: translateX(-120%);
+    transition: all 0.3s ease;
+}
+
+.txt-usuario{
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    transition: all 0.3s ease;
+    color: red;
+    font-family: Arial;
+    font-weight: 600;
+}
+
+.datos-login input:focus + .lbl-usuario .txt-usuario, .datos-login input:valid + .lbl-usuario .txt-usuario{
+    transform: translateY(-150%);
+    font-size: 13px;
+    color: orangered;
+    border: none;
+    padding-left: 5 px;
+} */
+
+
+
+
+/*  */
+
+.datos-login div input:hover{
+    margin: 0;
+    box-shadow: 0 0 10px black;
+}
+
+.btn-login{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* height: 50%; */
+}
+
+.btn-login div{
+    padding: 20px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    /* width: 40%; */
+}
+
+.btn-login div button{
+    width: 95%;
+    height: 100%;
+    color: white;
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: 600;
+    border: 0;
+    border-radius: 5px;
+    background-color: orangered;
+    background-image: linear-gradient(
+        -60deg,
+        transparent, transparent 40%,
+        #ffffff44 40%, #ffffff44 60%,
+        transparent 60%, transparent 100%
+    );
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    background-position-x: 150%;
+}
+
+.btn-login div button:hover{
+    background-position-x: -150%;
+    transition: background-position-x 600ms;
+    box-shadow: 0 0 5px orangered;
+}
+
+.btn-login div button a{
+    text-decoration: none;
+    color: white;
+}
+
+.footer-login{
+    padding: 2% 0;
+    display: flex;
+    align-items: center;
+    color: orangered;
+    font-family: Arial;
+    font-weight: 600;
+    /* height: 10vh; */
+}
+
+.fondo-login{
+    background-color: orangered;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../img/fondo1.jpeg');
+    background-repeat: no-repeat;
+    background-size: 70% 75%;
+    text-align: center;
+    background-position: center;
+    transition: 0.5s;
+}
+
+.fondo-login:hover{
+    background-size: 75% 80%;
+}
+
+/* Registro Usuario */
+.scroll-registro-usuario{
+    overflow-y: auto;
+    display: grid;
+    height: calc(100% + 6px);
+}
+
+.scroll-registro-usuario::-webkit-scrollbar{
+    background-color: rgb(230, 230, 230);
+    width: 6px;
+}
+
+.scroll-registro-usuario::-webkit-scrollbar-thumb{
+    background-color: orangered;
+    border-radius: 5px;
+}
+
+.scroll-registro-usuario::-webkit-scrollbar-thumb:hover{
+    box-shadow: 0 0 5px orangered;
+}
+
+.btn-login div p{
+    text-align: center;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+}
+
+.btn-login div p a{
+    text-decoration: none;
+    color: #0077ff;
+}
+
+.btn-login div p a:hover{
+    text-decoration: underline;
+}
