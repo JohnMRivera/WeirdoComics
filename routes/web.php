@@ -19,11 +19,12 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::controller(ControladorVistas::class)->group(function(){
-    Route::get('/','vistaMenu')->name('ini');
+    Route::get('menu','vistaMenu')->name('ini');
     Route::get('proveedores','vistaProveedores')->name('pro');
     Route::get('consultaCA','vistaCA')->name('cca');
     Route::get('pedidos','vistaPedidos')->name('ped');
-    Route::get('login','vistaLogin')->name('log');
+    Route::get('/','vistaLogin')->name('log');
+    Route::get('/registro_usuario','registroUsuario')->name('reg_usu');
     Route::get('registro_articulos','vistaRegistroA')->name('rega');
     Route::get('registro_comics','vistaRegistroC')->name('regc');
     // Route::get('ventas_mostrador','vistaVentasM')->name('venm');
@@ -31,14 +32,18 @@ Route::controller(ControladorVistas::class)->group(function(){
     Route::get('tienda','vistaTienda')->name('shop');
     Route::get('carrito', 'vistaCarrito')->name('shCar');
     Route::post('agregar', 'AgregarArticulo') -> name('addArti');
-    Route::post('agregar_comic', 'AgregarComic')->name('addCom');
-    Route::post('agregar_proveedor', 'AgregarProveedor')->name('addProv');
-    Route::get('sesion','VistaSesion')->name('ses');
-    Route::get('singup','VistaSingUp')->name('Up');
+    // Route::post('agregar_comic', 'AgregarComic')->name('addCom');
+    // Route::post('agregar_proveedor', 'AgregarProveedor')->name('addProv');
+    // // Route::get('sesion','VistaSesion')->name('ses');
     
+    // Procesos de validación
+    Route::post('agregar_articulo_pedido','agregarArticuloPedido')->name('agr_art');
+    Route::post('procesar_login','procesarLogin')->name('pro_log');
+    Route::post('procesar_registro_usuario','procesarRegistroUsuario')->name('pro_reg_usu');
     Route::get('eliminar_proveedor','eliminarProveedor')->name('eli_pro');
     Route::get('eliminar_articulo','eliminarArticulo')->name('eli_art');
+    Route::post('generar_pedido','generarPedido')->name('gen_ped');
 });
 
-Route::post('agregar_articulo_pedido',[ControladorVistas::class, 'agregarArticuloPedido'])->name('agr_art');
-Route::post('guardarRegistro',[ControladorVistas::class,'ProcesarRegistro'])->name('Sing');
+// 
+// Route::post('guardarRegistro',[ControladorVistas::class,'ProcesarRegistro'])->name('Sing');
