@@ -26,11 +26,15 @@ Route::controller(ControladorVistas::class)->group(function(){
     Route::get('/','vistaLogin')->name('log');
     Route::get('/registro_usuario','registroUsuario')->name('reg_usu');
     Route::get('registro_articulos','vistaRegistroA')->name('rega');
-    Route::get('registro_comics','vistaRegistroC')->name('regc');
+    Route::get('registro_comics','vistaRegistroC')->name('reg_com');
     // Route::get('ventas_mostrador','vistaVentasM')->name('venm');
     Route::get('registro_Proveedores', 'vistaRegistroPro')->name('regpro');
     Route::get('tienda','vistaTienda')->name('shop');
     Route::get('carrito', 'vistaCarrito')->name('shCar');
+
+    Route::get('eliminar_comic','eliminarComic')->name('eli_com');
+    Route::post('agregar_comic','agregarComic')->name('agr_com');
+
     Route::post('agregar', 'AgregarArticulo') -> name('addArti');
     // Route::post('agregar_comic', 'AgregarComic')->name('addCom');
     // Route::post('agregar_proveedor', 'AgregarProveedor')->name('addProv');

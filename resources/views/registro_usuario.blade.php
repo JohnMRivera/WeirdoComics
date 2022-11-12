@@ -16,7 +16,7 @@
             <form class="form-login" action=" {{ route('pro_reg_usu') }} " method="post">
                 @csrf
                 <div class="titulo-login">
-                    <h2>Ingresar</h2>
+                    <h2>Registro</h2>
                 </div>
                 <div class="scroll-registro-usuario">
                   <div class="datos-login">

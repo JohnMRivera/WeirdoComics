@@ -2,81 +2,206 @@
 
 @section('titulo_documento', 'Registro de comics')
 
-@section('diseño')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="estilos/estilos-b.css">
-@endsection
-
 @section('contenido')
 
-@if(session()->has('agregar'))
+@if(session()->has('eliminar_comic'))
+
+    <script>
+        Swal.fire({
+          title: '¿Estás seguro?',
+          text: "¡No podrás revertir esto!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, eliminarlo!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Eliminado!',
+              'El Comic ha sido eliminado.',
+              'success'
+            )
+          }
+        })
+    </script>
+
+@endif
+
+{{-- @if(session()->has('agregar'))
 {!! "<script> Swal.fire({
     icon: 'success',
     title: 'Comic " . session()->get("agregar") . " se a guardado exitosamente',
     showConfirmButton: false,
     timer: 2000
   }) </script>"!!}
-@endif
+@endif --}}
 
-<form action="{{route('addCom')}}" method="POST" class="form-articulos comics">
-    @csrf
-    <div class="cont-form">
-        <div class="titulo-arti">
-            <h2>Comic</h2>
-        </div>
-        <div>
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="fecha-comic" value="{{old('fecha-comic')}}" type="date" class="form-control" id="floatingInput" placeholder="10/12/2022">
-                <label for="floatingInput">Fecha</label>
-            </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('fecha-comic')}}</p>
-
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="id-comic" value="{{old('id-comic')}}" type="text" class="form-control" id="floatingInput" placeholder="1254685">
-                <label for="floatingInput">id de comic</label>
-            </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('id-comic')}}</p>
-
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="nombre-comic" value="{{old('nombre-comic')}}" type="text" class="form-control" id="floatingInput" placeholder="Spider-Man">
-                <label for="floatingInput">Nombre</label>
-            </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('nombre-comic')}}</p>
-
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="compañia-comic" value="{{old('compañia-comic')}}" type="text" class="form-control" id="floatingInput" placeholder="Marvel">
-                <label for="floatingInput">Compañia</label>
-            </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('compañia-comic')}}</p>
-
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="cantidad-comic" value="{{old('cantidad-comic')}}" type="text" class="form-control" id="floatingInput" placeholder="Marvel">
-                <label for="floatingInput">Cantidad</label>
-            </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('cantidad-comic')}}</p>
-
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="precio-compra-comic" value="{{old('precio-compra-comic')}}" type="text" class="form-control" id="floatingInput" placeholder="12">
-                <label for="floatingInput">Precio de compra</label>
-            </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('precio-compra-comic')}}</p>
-
-            <fieldset disabled>
-                <div class="form-floating mb-3 inputs-articulos">
-                    <input name="precio-venta-arti" value="{{old('precio-venta-comic')}}" type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
-                    <label for="floatingInput">Precio de venta</label>
+<main class="main-comics">
+    <form class="form-comics" action=" {{ route('agr_com') }} " method="post">
+        @csrf
+        <header class="header-comics">
+            <h1>Nuevo Comic</h1>
+        </header>
+        <div class="datos-comics__scroll">
+            <div class="datos-comics">
+                <div>
+                    <div class="input">
+                        <input name="txtIdComic" type="text" value="{{ old('txtIdComic') }}">
+                        <label for="">Id</label>
+                    </div>
                 </div>
-            </fieldset>
-            <p class="text-danger fst-italic p">{{$errors -> first('precio-venta-comic')}}</p>
-
+                @if($errors->first('txtIdComic'))
+                    <div class="alert">
+                        <p> {{ $errors->first('txtIdComic') }} </p>
+                    </div>
+                @endif
+                <div>
+                    <div class="input">
+                        <input name="txtNombreComic" type="text" value="{{ old('txtNombreComic') }}">
+                        <label for="">Nombre</label>
+                    </div>
+                </div>
+                @if($errors->first('txtNombreComic'))
+                    <div class="alert">
+                        <p> {{ $errors->first('txtNombreComic') }} </p>
+                    </div>
+                @endif
+                <div>
+                    <div class="input">
+                        <input name="txtCompañiaComic" type="text" value="{{ old('txtCompañiaComic') }}">
+                        <label for="">Compañia</label>
+                    </div>
+                </div>
+                @if($errors->first('txtCompañiaComic'))
+                    <div class="alert">
+                        <p> {{ $errors->first('txtCompañiaComic') }} </p>
+                    </div>
+                @endif
+                <div>
+                    <div class="input">
+                        <input name="txtCantidadComic" type="text" value="{{ old('txtCantidadComic') }}">
+                        <label for="">Cantidad</label>
+                    </div>
+                </div>
+                @if($errors->first('txtCantidadComic'))
+                    <div class="alert">
+                        <p> {{ $errors->first('txtCantidadComic') }} </p>
+                    </div>
+                @endif
+                <div>
+                    <div class="input">
+                        <input name="txtFechaComic" type="date" value="{{ old('txtFechaComic') }}">
+                        <label for="">Fecha</label>
+                    </div>
+                </div>
+                @if($errors->first('txtFechaComic'))
+                    <div class="alert">
+                        <p> {{ $errors->first('txtFechaComic') }} </p>
+                    </div>
+                @endif
+                <div>
+                    <div class="input">
+                        <input name="txtPrecioCompraComic" type="text" value="{{ old('txtPrecioCompraComic') }}">
+                        <label for="">Precio Compra</label>
+                    </div>
+                </div>
+                @if($errors->first('txtPrecioCompraComic'))
+                    <div class="alert">
+                        <p> {{ $errors->first('txtPrecioCompraComic') }} </p>
+                    </div>
+                @endif
+                <div>
+                    <div class="input">
+                        <input name="txtPrecioVentaComic" type="text" value="{{ old('txtPrecioVentaComic') }}">
+                        <label for="">Precio Venta</label>
+                    </div>
+                </div>
+                @if($errors->first('txtPrecioVentaComic'))
+                    <div class="alert">
+                        <p> {{ $errors->first('txtPrecioVentaComic') }} </p>
+                    </div>
+                @endif
+            </div>
         </div>
-        <div class="cont-boton-arti">
-            <button type="submit" class="btn btn-outline-success boton-arti">Guardar</button>
+        <div class="btn-comics">
+            <button>
+                ¡Agregar!
+            </button>
+        </div>
+    </form>
+    <div class="scroll-comics">
+        <div class="contenido-comics">
+            @for($i = 1; $i <= 7; $i++)
+            <div class="contenido-comics__seccion">
+                <div class="c-c__seccion-carta">
+                    <div class="c-c__seccion-carta__img">
+                        <img src="img/spiderman.jpeg" alt="">
+                    </div>
+                    <div class="c-c__seccion-carta__contenido">
+                        <div class="c-c__s-c__contenido-datos">
+                            <label for="">Nombre Comic</label>
+                            <label for="">Cantidad</label>
+                        </div>
+                        <div class="c-c__s-c__contenido-op">
+                            <a href=" {{ route('eli_com') }} ">
+                                <img src="img/eliminar.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-c__seccion-carta">
+                    <div class="c-c__seccion-carta__img">
+                        <img src="img/spiderman.jpg" alt="">
+                    </div>
+                    <div class="c-c__seccion-carta__contenido">
+                        <div class="c-c__s-c__contenido-datos">
+                            <label for="">Nombre Comic</label>
+                            <label for="">Cantidad</label>
+                        </div>
+                        <div class="c-c__s-c__contenido-op">
+                            <a href=" {{ route('eli_com') }} ">
+                                <img src="img/eliminar.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-c__seccion-carta">
+                    <div class="c-c__seccion-carta__img">
+                        <img src="img/superman.jpeg" alt="">
+                    </div>
+                    <div class="c-c__seccion-carta__contenido">
+                        <div class="c-c__s-c__contenido-datos">
+                            <label for="">Nombre Comic</label>
+                            <label for="">Cantidad</label>
+                        </div>
+                        <div class="c-c__s-c__contenido-op">
+                            <a href=" {{ route('eli_com') }} ">
+                                <img src="img/eliminar.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-c__seccion-carta">
+                    <div class="c-c__seccion-carta__img">
+                        <img src="img/spiderman.jpeg" alt="">
+                    </div>
+                    <div class="c-c__seccion-carta__contenido">
+                        <div class="c-c__s-c__contenido-datos">
+                            <label for="">Nombre Comic</label>
+                            <label for="">Cantidad</label>
+                        </div>
+                        <div class="c-c__s-c__contenido-op">
+                            <a href=" {{ route('eli_com') }} ">
+                                <img src="img/eliminar.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endfor
         </div>
     </div>
-    {{-- imagen --}}
-    <img class="imgComics" src="/img/spiderman.jpg" alt="Imagen de articulos">
-</form>
+</main>
 
-
-@stop
+@endsection

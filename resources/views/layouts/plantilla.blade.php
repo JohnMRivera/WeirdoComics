@@ -17,8 +17,8 @@
             </label>
             <input class="menu-input" id="check" type="checkbox">
             <ul class="menu-op">
-                <li class="menu-op__titulo"><a href="http://weirdocomics.test">Weirdo Comics</a></li>
-                <li class="menu-op__item"><a href=" {{ route('regc') }} ">Comics</a>
+                <li class="menu-op__titulo"><a href="/">Weirdo Comics</a></li>
+                <li class="menu-op__item"><a href=" {{ route('reg_com') }} ">Comics</a>
                 </li>
                 <li class="menu-op__item"><a href=" {{ route('rega') }} ">Articulos</a>
                 </li>

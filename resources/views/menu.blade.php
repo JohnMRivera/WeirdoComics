@@ -2,12 +2,25 @@
 
 @section('titulo_documento', 'Inicio')
 
-@section('diseño')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="estilos/estilos-b.css">
-@endsection
-
 @section('contenido')
+
+@if(session()->has('logeo_confirmado'))
+
+    {!!
+    "<script>
+        Swal.fire({
+          title: '¡Bienvenido!',
+          text: '" . session()->get('logeo_confirmado') . "',
+          imageUrl: 'https://unsplash.it/400/200',
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: 'Custom image',
+        })
+    </script>"
+    !!}
+
+@endif
+
 <div class="cont-menu">
     <h1 class="titulo-menu"><strong>WeirdoComics</strong></h1>
     <picture class="cont-img-menu">

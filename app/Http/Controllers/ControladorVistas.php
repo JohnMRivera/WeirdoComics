@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ValidadorPedidos;
 use App\Http\Requests\ValidadorLogin;
 use App\Http\Requests\ValidadorRegistroUsuario;
-use App\Http\Requests\validarRegistroComics;
+use App\Http\Requests\ValidadorRegistroComics;
 use App\Http\Requests\VistaSingUp;
 
 class ControladorVistas extends Controller
@@ -82,6 +82,19 @@ class ControladorVistas extends Controller
     public function procesarRegistroUsuario(ValidadorRegistroUsuario $request){
         return redirect()->route('reg_usu')->with('registro_usuario_confirmado','El registro de Usario ha sido exitoso');
     }
+
+    public function eliminarComic(){
+        return redirect()->route('reg_com')->with('eliminar_comic','El comic ha sido eliminado');
+    }
+
+    public function agregarComic(ValidadorRegistroComics $request){
+        $nombre = $request->input('txtNombreComic');
+
+        return redirect()->route('reg_com')->with('agregar_comic',$nombre);
+    }
+
+
+
 
     public function generarPedido(){
         return redirect()->route('ped')->with('generar_pedido','El pedido ha sido generado');
