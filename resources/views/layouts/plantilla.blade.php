@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    @yield('diseño')
-
+    <link rel="stylesheet" href="estilos/estilos.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <title>@yield('titulo_documento')</title>
