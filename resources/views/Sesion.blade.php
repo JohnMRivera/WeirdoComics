@@ -34,7 +34,7 @@
                 @endif
 
                     <div class="card-footer text-muted">
-                        <button type="button" class="btn btn-danger">Entrar</button>
+                        <button type="button" class="btn btn-danger" href="Ini">Entrar</button>
                     </div>
                     <div class="text-center p-3">
                         Si no estas registrado
