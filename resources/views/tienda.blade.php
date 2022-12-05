@@ -2,13 +2,158 @@
 
 @section('titulo_documento', 'Tienda')
 
-@section('diseño')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="estilos/estilos-b.css">
-@endsection
-
 @section('contenido')
 
+<main class="main-tienda">
+    <form class="form-tienda" action="" method="post">
+        @csrf
+        <header class="header-tienda">
+            <h1>Nuevo Articulo</h1>
+        </header>
+        <div class="datos-tienda__scroll">
+            <div class="datos-tienda">
+                <div>
+                    <div class="input-reg_pro">
+                        <input name="txtNombreArticulo" type="text" value="{{ old('txtNombreArticulo') }}" placeholder="Nombre">
+                        <label for="">Nombre</label>
+                    </div>
+                </div>
+                @if($errors->first('txtNombreArticulo'))
+                    <div class="alert">
+                        <p> {{ $errors->first('txtNombreArticulo') }} </p>
+                    </div>
+                @endif
+                <div>
+                    <div class="input-reg_pro">
+                        {{-- <input type="text"> --}}
+                        <select name="txtTipo" id="tipo">
+                            <option value="" disabled selected="">Tipo</option>
+                            <option value="todos">Todos</option>
+                            <option value="comics">Comics</option>
+                            <option value="articulos">Articulos</option>
+                        </select>
+                        <label for="tipo">Tipo</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-comics">
+            <button>
+                ¡Agregar!
+            </button>
+        </div>
+    </form>
+    <div class="contenido-tienda__scroll">
+        <div class="contenido-tienda">
+            {{-- <div class="contenido-tienda__seccion"> --}}
+                @for($i = 1; $i <= 7; $i++)
+                <div class="c-c__seccion-carta">
+                    <div class="c-c__seccion-carta__img">
+                        <img src="img/spiderman.jpeg" alt="">
+                    </div>
+                    <div class="c-c__seccion-carta__contenido">
+                        <div class="c-c__s-c__contenido-datos">
+                            <label for="">Nombre Comic</label>
+                            <label for="">Cantidad</label>
+                        </div>
+                        <div class="c-c__s-c__contenido-op">
+                            <a href=" {{ route('eli_com') }} ">
+                                <img src="img/eliminar.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-c__seccion-carta">
+                    <div class="c-c__seccion-carta__img">
+                        <img src="img/spiderman.jpg" alt="">
+                    </div>
+                    <div class="c-c__seccion-carta__contenido">
+                        <div class="c-c__s-c__contenido-datos">
+                            <label for="">Nombre Comic</label>
+                            <label for="">Cantidad</label>
+                        </div>
+                        <div class="c-c__s-c__contenido-op">
+                            <a href=" {{ route('eli_com') }} ">
+                                <img src="img/eliminar.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-c__seccion-carta">
+                    <div class="c-c__seccion-carta__img">
+                        <img src="img/superman.jpeg" alt="">
+                    </div>
+                    <div class="c-c__seccion-carta__contenido">
+                        <div class="c-c__s-c__contenido-datos">
+                            <label for="">Nombre Comic</label>
+                            <label for="">Cantidad</label>
+                        </div>
+                        <div class="c-c__s-c__contenido-op">
+                            <a href=" {{ route('eli_com') }} ">
+                                <img src="img/eliminar.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-c__seccion-carta">
+                    <div class="c-c__seccion-carta__img">
+                        <img src="img/spiderman.jpeg" alt="">
+                    </div>
+                    <div class="c-c__seccion-carta__contenido">
+                        <div class="c-c__s-c__contenido-datos">
+                            <label for="">Nombre Comic</label>
+                            <label for="">Cantidad</label>
+                        </div>
+                        <div class="c-c__s-c__contenido-op">
+                            <a href=" {{ route('eli_com') }} ">
+                                <img src="img/eliminar.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                    @for($j = 1; $j <= 2; $j++)
+                    <div class="c-t__seccion-carta">
+                        <div class="c-t__seccion-carta__img">
+                            <img src="img/cell.jpeg" alt="">
+                        </div>
+                        <div class="c-t__seccion-carta__contenido">
+                            <div class="c-t__s-c__contenido-datos">
+                                <label for="">Nombre Articulo</label>
+                                <label for="">Cantidad</label>
+                            </div>
+                            <div class="c-t__s-c__contenido-op">
+                                <a href="">
+                                    <img src="img/eliminar.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c-t__seccion-carta">
+                        <div class="c-t__seccion-carta__img">
+                            <img src="img/DocStrange.jpeg" alt="">
+                        </div>
+                        <div class="c-t__seccion-carta__contenido">
+                            <div class="c-t__s-c__contenido-datos">
+                                <label for="">Nombre Articulo</label>
+                                <label for="">Cantidad</label>
+                            </div>
+                            <div class="c-t__s-c__contenido-op">
+                                <a href="">
+                                    <img src="img/eliminar.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    @endfor
+                @endfor
+            {{-- </div> --}}
+        </div>
+    </div>
+  </main>
+
+
+
+{{-- 
 <div class="cont-tienda">
     <div class="icono">
         <a href="{{route('shCar')}}"><img class="img-tienda" src="/img/carrito-de-compras.png" alt=""></a>
@@ -169,6 +314,6 @@
         </div>
 
       </div>
-</div>
+</div> --}}
 
 @stop

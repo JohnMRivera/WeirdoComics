@@ -83,7 +83,7 @@
 
     <main class="main-pedidos">
         <div class="form-pedidos">
-            <form action="{{ route('agr_art') }}" method="post">
+            <form action="{{ route('agr_art_ped') }}" method="post">
                 @csrf
                 <header class="header-pedidos">
                     <div class="header-pedidos__titulo">

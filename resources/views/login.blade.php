@@ -5,9 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="estilos/estilos.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
 </head>
 <body>
+
+@if(session()->has('registrado'))
+
+    <script>
+        Swal.fire(
+            'Registro Exitoso!',
+            'El usuarioha sido registrado exitosamente!',
+            'success'
+        )
+    </script>
+
+
+@elseif(session()->has('correo_no_disponible'))
+
+  <script>
+      Swal.fire(
+          'Correo no disponible!',
+          'El correo ingresado ya esta en uso!',
+          'error'
+      )
+  </script>
+
+@elseif(session()->has('incorrecto'))
+
+    <script>
+        Swal.fire(
+            'Vuelva a intentarlo!',
+            'Correo o contraseña incorrectos!',
+            'error'
+        )
+    </script>
+
+@endif
     <main class="main-login">
         <div class="contenido-login">
             <header class="header-login">
@@ -20,14 +56,14 @@
                 </div>
                 <div class="datos-login">
                     <div>
-                        <input name="txtUsuario" type="text"  placeholder="Usuario">
+                        <input name="txtCorreo" type="text"  placeholder="Nombre" value="{{ old('txtCorreo') }}">
                         {{-- <label class="lbl-usuario">
                             <span class="txt-usuario">Nombre</span>
                         </label> --}}
                     </div>
-                    @if($errors->first('txtUsuario'))
+                    @if($errors->first('txtCorreo'))
                         <div class="alert">
-                            <p> {{ $errors->first('txtUsuario') }} </p>
+                            <p> {{ $errors->first('txtCorreo') }} </p>
                         </div>
                     @endif
                     <div>
@@ -50,7 +86,7 @@
                     </div>
                     <div>
                       <p>¿Eres nuevo en WeirdoComics?
-                        <a href=" {{ route('reg_usu') }} ">Crear una Cuenta</a>
+                        <a href=" {{ route('usuario.create') }} ">Crear una Cuenta</a>
                       </p>
                     </div>
                 </div>

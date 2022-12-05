@@ -2,82 +2,121 @@
 
 @section('titulo_documento', 'Registro de proveedores')
 
-@section('diseño')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="estilos/estilos-b.css">
-@endsection
-
 @section('contenido')
 
-@if(session()->has('agregar'))
-{!! "<script> Swal.fire({
-    icon: 'success',
-    title: 'Proveedor " . session()->get("agregar") . " se a guardado exitosamente',
-    showConfirmButton: false,
-    timer: 2000
-  }) </script>"!!}
+@if(session()->has('registrado'))
+
+    {!! 
+        "<script> Swal.fire({
+          icon: 'success',
+          title: 'Proveedor " . session()->get("agregar") . " se ha guardado exitosamente',
+          showConfirmButton: false,
+          timer: 2000
+        }) </script>"
+    !!}
+
 @endif
 
-<form action="{{route('addProv')}}" method="POST" class="form-proveedores">
-    @csrf
-
-    <img src="" alt="">
-
-    <div class="cont-form form-borde">
-        <div class="titulo-pro">
-            <h2>Proveedor</h2>
-        </div>
-        <div class="inputs-cont">
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="nom-empresa" value="{{old('nom-empresa')}}" type="text" class="form-control" id="floatingInput" placeholder="10/12/2022">
-                <label for="floatingInput">Nombre de la empresa</label>
+<main class="main-reg_pro">
+    <div>
+        <form class="form-reg_pro" action=" {{ route('proveedor.store') }} " method="post">
+            @csrf
+            <div class="header-reg_pro">
+                <h1>Registrar Proveedor</h1>
             </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('nom-empresa')}}</p>
-
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="direccion" value="{{old('direccion')}}" type="text" class="form-control" id="floatingInput" placeholder="1254685">
-                <label for="floatingInput">Direccion</label>
+            <div class="datos-reg_pro__scroll">
+                <div class="datos-reg_pro">
+                    <section class="datos-reg_pro__seccion">
+                        <div>
+                            <div class="input-reg_pro">
+                                <input name="txtEmpresaProveedor" type="text" value="{{ old('txtEmpresaProveedor') }}" placeholder="Empresa">
+                                <label for="">Nombre</label>
+                            </div>
+                            @if($errors->first('txtEmpresaProveedor'))
+                                <div class="alert2">
+                                    <p> {{ $errors->first('txtEmpresaProveedor') }} </p>
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            <div class="input-reg_pro">
+                                <input name="txtDireccionProveedor" type="text" value="{{ old('txtDireccionProveedor') }}" placeholder="Dirección">
+                                <label for="">Dirección</label>
+                            </div>
+                            @if($errors->first('txtDireccionProveedor'))
+                                <div style="color: red">
+                                    <p> {{ $errors->first('txtDireccionProveedor') }} </p>
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            <div class="input-reg_pro">
+                                <input name="txtPaisProveedor" type="text" value="{{ old('txtPaisProveedor') }}" placeholder="País">
+                                <label for="">País</label>
+                            </div>
+                            @if($errors->first('txtPaisProveedor'))
+                                <div style="color: red">
+                                    <p> {{ $errors->first('txtPaisProveedor') }} </p>
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            <div class="input-reg_pro">
+                                <input name="txtContactoProveedor" type="text" value="{{ old('txtContactoProveedor') }}" placeholder="Contacto">
+                                <label for="">Contacto</label>
+                            </div>
+                            @if($errors->first('txtContactoProveedor'))
+                                <div style="color: red">
+                                    <p> {{ $errors->first('txtContactoProveedor') }} </p>
+                                </div>
+                            @endif
+                        </div>
+                    </section>
+                    <section class="datos-reg_pro__seccion">
+                        <div>
+                            <div class="input-reg_pro">
+                                <input name="txtNoFijoProveedor" type="text" value="{{ old('txtNoFijoProveedor') }}" placeholder="No. Fijo">
+                                <label for="">No. Fijo</label>
+                            </div>
+                            @if($errors->first('txtNoFijoProveedor'))
+                                <div style="color: red">
+                                    <p> {{ $errors->first('txtNoFijoProveedor') }} </p>
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            <div class="input-reg_pro">
+                                <input name="txtNoCelularProveedor" type="text" value="{{ old('txtNoCelularProveedor') }}" placeholder="No. Celular">
+                                <label for="">No. Celular</label>
+                            </div>
+                            @if($errors->first('txtNoCelularProveedor'))
+                                <div style="color: red">
+                                    <p> {{ $errors->first('txtNoCelularProveedor') }} </p>
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            <div class="input-reg_pro">
+                                <input name="txtCorreoProveedor" type="text" value="{{ old('txtCorreoProveedor') }}" placeholder="Correo">
+                                <label for="">Correo</label>
+                            </div>
+                            @if($errors->first('txtCorreoProveedor'))
+                                <div style="color: red">
+                                    <p> {{ $errors->first('txtCorreoProveedor') }} </p>
+                                </div>
+                            @endif
+                        </div>
+                    </section>
+                </div>
             </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('direccion')}}</p>
-
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="pais" value="{{old('pais')}}" type="text" class="form-control" id="floatingInput" placeholder="Spider-Man">
-                <label for="floatingInput">Pais</label>
+            <div class="btn-reg_pro">
+                <button>
+                    Registrar
+                </button>
             </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('pais')}}</p>
-
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="contacto" value="{{old('contacto')}}" type="text" class="form-control" id="floatingInput" placeholder="Marvel">
-                <label for="floatingInput">Contacto</label>
-            </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('contacto')}}</p>
-
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="no-fijo" value="{{old('no-fijo')}}" type="text" class="form-control" id="floatingInput" placeholder="12">
-                <label for="floatingInput">Numero fijo</label>
-            </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('no-fijo')}}</p>
-
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="no-celular" value="{{old('no-celular')}}" type="text" class="form-control" id="floatingInput" placeholder="12">
-                <label for="floatingInput">Numero celular</label>
-            </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('no-celular')}}</p>
-
-            <div class="form-floating mb-3 inputs-articulos">
-                <input name="correo" value="{{old('correo')}}" type="text" class="form-control" id="floatingInput" placeholder="12">
-                <label for="floatingInput">Correo</label>
-            </div>
-            <p class="text-danger fst-italic p">{{$errors -> first('correo')}}</p>
-
-        </div>
-        <div class="cont-boton-arti btn-comic">
-            <button type="submit" class="btn btn-outline-success boton-arti">Guardar</button>
-        </div>
+        </form>
+        <div class="fondo-reg_pro"></div>
     </div>
-    {{-- imagen --}}
-    <img src="" alt="">
-</form>
-
+</main>
 
 @stop

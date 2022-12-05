@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="estilos/estilos.css">
+
+    @yield('diseño')
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <title>@yield('titulo_documento')</title>
@@ -17,16 +20,16 @@
             </label>
             <input class="menu-input" id="check" type="checkbox">
             <ul class="menu-op">
-                <li class="menu-op__titulo"><a href="/">Weirdo Comics</a></li>
-                <li class="menu-op__item"><a href=" {{ route('reg_com') }} ">Comics</a>
+                <li class="menu-op__titulo"><a href=" {{ route('ini') }} ">Weirdo Comics</a></li>
+                <li class="menu-op__item"><a href=" {{ route('comic.create') }} ">Comics</a>
                 </li>
-                <li class="menu-op__item"><a href=" {{ route('rega') }} ">Articulos</a>
+                <li class="menu-op__item"><a href=" {{ route('articulo.create') }} ">Articulos</a>
                 </li>
                 <li class="menu-op__item"><a href=" {{ route('shop') }} ">En Tienda</a></li>
                 <li class="menu-op__item"><a href="">Proveedores</a>
                     <ul>
-                        <li><a href="/proveedores">Consultar</a></li>
-                        <li><a href="/registro_Proveedores">Registrar</a></li>
+                        <li><a href=" {{ route('proveedor.index') }} ">Consultar</a></li>
+                        <li><a href=" {{ route('proveedor.create') }} ">Registrar</a></li>
                     </ul>
                 </li>
                 

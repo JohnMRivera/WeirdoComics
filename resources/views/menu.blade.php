@@ -4,7 +4,7 @@
 
 @section('contenido')
 
-@if(session()->has('logeo_confirmado'))
+@if(session()->has('ingresado'))
 
     {!!
     "<script>
@@ -24,7 +24,7 @@
 <div class="cont-menu">
     <h1 class="titulo-menu"><strong>WeirdoComics</strong></h1>
     <picture class="cont-img-menu">
-        <img src="/img/Menu.jpeg" alt="">
+        {{-- <img src="/img/Menu.jpeg" alt=""> --}}
     </picture>
     <div class="cont-text-menu">
         <h2 class="text"><strong>Bienvenido a WeirdoComics</strong></h2>
