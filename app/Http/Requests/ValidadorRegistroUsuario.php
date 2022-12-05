@@ -24,10 +24,14 @@ class ValidadorRegistroUsuario extends FormRequest
     public function rules()
     {
         return [
+            'txtNombre' => 'required',
+            'txtApellidoP' => 'required',
+            'txtApellidoM' => 'required',
             'txtCorreo' => 'required|email',
-            'txtUsuario' => 'required|min:3',
             'txtContra' => 'required|min:8|min_digits:1',
-            'txtConfirmarContra' => 'required'
+            'txtConfirmarContra' => 'required',
+            'txtRol' => 'required',
+            'txtTelefono' => 'required'
         ];
     }
 }

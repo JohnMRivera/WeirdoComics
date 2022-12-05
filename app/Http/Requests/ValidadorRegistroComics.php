@@ -24,13 +24,14 @@ class ValidadorRegistroComics extends FormRequest
     public function rules()
     {
         return [
-            'txtIdComic' => 'required|numeric',
             'txtNombreComic' => 'required',
+            'txtEdicionComic' => 'required',
             'txtCompañiaComic' => 'required',
             'txtCantidadComic' => 'required|numeric',
-            'txtFechaComic' => 'required|fecha',
-            'txtPrecioCompraComic' => 'required',
-            'txtPrecioVentaComic' => 'required'
+            // 'txtFechaComic' => 'required|date',
+            'txtPrecioCompraComic' => 'required|numeric',
+            'img' => 'required'
+            // 'txtPrecioVentaComic' => 'required'
         ];
     }
 }
