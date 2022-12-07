@@ -1,0 +1,387 @@
+/* Menu */
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: rgb(40, 40, 40);
+    margin: 0;
+}
+
+/* .encabezado{
+    background-color: rgb(220, 220, 220);
+    width: 75%;
+} */
+
+.menu {
+    background-color: rgb(230, 230, 230);
+    margin: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    padding: 10px 0;
+    height: 60px;
+    display: inline-block;
+}
+
+.menu-barra {
+    display: none;
+    float: right;
+    margin-right: 40px;
+    line-height: 60px;
+}
+
+.menu-input {
+    display: none;
+}
+
+.menu-op {
+    /* min-width: 10%; */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0 auto 0 10px;
+}
+
+ul {
+    list-style: none;
+}
+
+.menu-op > li {
+    position: relative;
+    display: inline-block;
+}
+
+/* .menu-op > li > a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+} */
+
+.menu-op__titulo a {
+    color: orangered;
+    font-size: 20px;
+    font-weight: 700;
+    transition: 0.5s;
+}
+
+.menu-op__titulo a:hover {
+    font-size: 23px;
+    text-shadow: 0 0 8px rgb(255 68 0 / 30%);
+}
+
+.menu-op > li {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-op > li > a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+}
+
+.menu-op__item a {
+    color: black;
+    transition: 0.5s;
+}
+
+.menu-op li ul {
+    position: absolute;
+    background-color: rgb(200, 200, 200);
+    width: 120%;
+    /* display: none; */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    list-style: none;
+}
+.menu-op li:hover ul {
+    /* display: block; */
+    visibility: visible;
+    opacity: 1;
+    background-color: rgb(220, 220, 220);
+}
+
+.menu-op li ul {
+    position: absolute;
+    background-color: rgb(200, 200, 200);
+    width: 120%;
+    /* display: none; */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    list-style: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.menu-op li ul li a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+}
+
+.menu-op li ul a:hover {
+    background-color: rgb(200, 200, 210);
+}
+
+.menu-op__item a:hover {
+    font-size: 18px;
+    font-weight: 600;
+}
+.menu-op li ul li a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+}
+.menu-op__item a {
+    color: black;
+    transition: 0.5s;
+}
+.menu-op__item a {
+    color: black;
+    transition: 0.5s;
+}
+
+.menu-op > li {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-op__sesion {
+    float: right;
+}
+
+.menu-op > li > a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+}
+
+.menu-op__sesion a img {
+    width: 35px;
+}
+
+/* Registro articulos */
+.form-articulos{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: white;
+    padding: 2%;
+    background: url('/img/Fondo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.form-proveedores{
+    background-color: white;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    background: url('/img/Fondo6.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.titulo-pro{
+    text-align: center;
+    margin-bottom: 1%;
+}
+.comics{
+    margin-top: 0.5%;
+}
+img{
+    border: 10px;
+    width: 30%;
+}
+.imgComics{
+    width: 27%;
+}
+.cont-form{
+    padding: 4%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(0, 0, 0);
+    background-color: white;
+}
+/* .color-form{
+    background-color: rgba(255, 68, 0, 0.05);
+} */
+.form-borde{
+    border: 5px solid rgb(0, 0, 0);
+}
+.form-borde:hover{
+    box-shadow: 0 0 10px orangered;
+}
+.cont-boton-arti{
+    display: flex;
+    justify-content: end;
+}
+input:hover{
+    box-shadow: 0 0 10px orangered;
+}
+.btn-comic{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.boton-arti{
+    height: 45px;
+    width: 190px;
+}
+.inputs-articulos{
+    width: 500px;
+}
+.p{
+    text-align: left;
+}
+
+/* Vista tienda */
+
+.cont-tienda{
+    padding: 2%;
+    padding-right: 0%;
+    background: url('/img/Fondo5.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+.img-card{
+    height: 450px;
+}
+.card{
+    width: 90%;
+}
+#card-color{
+    color: white;
+    background-color: rgb(56, 56, 56);
+}
+.tienda-selec{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+.icon-a{
+    margin-left: 35%;
+}
+
+.img-tienda{
+    width: 70px;
+}
+.icono{
+    display: flex;
+    justify-content: end;
+    padding-right: 4%;
+    position: relative;
+}
+/* vista carrito */
+.cont-carrito{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    padding-top: 1%;
+    background: url('/img/Fondo6.jpeg');
+}
+.form-carrito{
+    width: 75%;
+    height: 100%;
+    margin: auto;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    background-color: rgb(72, 72, 72);
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1%;
+    color: white;
+}
+.cont-info{
+    width: 100%;
+    margin-bottom: 2%;
+}
+.rectangulo{
+    width: 100%;
+    height: 350px;
+    margin-bottom: 2%;
+    background-color: white;
+    z-index: 0;
+}
+.rectangulo:hover{
+    box-shadow: 0 0 10px orangered;
+}
+.h1{
+    margin: auto;
+    color: rgb(221, 122, 8);
+}
+.cont-labels{
+    display: flex;
+    justify-content: space-between;
+    font-size: 300%;
+    margin-bottom: 2%;
+}
+.btn-carrito{
+    height: 80%;
+    width: 200px;
+}
+/* Menu */
+
+.cont-menu{
+    background: url('/img/Fondo5.jpeg');
+    text-align: center;
+    padding-top: 3%;
+    display: flex;
+    flex-direction: column;
+}
+.cont-img-menu{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.titulo-menu{
+    font-size: 80px;
+    color: orangered;
+}
+.text{
+    color:rgb(255, 255, 255);
+}
+.cont-text-menu{
+    margin-bottom: 5%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: rgba(0, 0, 0, 0.354);
+}
+
+.carrito-table{
+    z-index: 1;
+    width: 100%;
+    border: 2px solid black;
+    border-spacing: 0;
+    border-collapse: collapse;
+    /* height: 100%; */
+    
+}
+
+.carrito-table thead{
+    height: 5vh;
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+
+.carrito-table tbody{
+    overflow-y: scroll;
+    color: black;
+}
+
+.carrito-table th,td{
+    border: 2px solid black;
+    padding: 1%;
+}
