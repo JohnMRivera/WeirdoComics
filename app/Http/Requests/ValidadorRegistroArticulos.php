@@ -24,13 +24,14 @@ class ValidadorRegistroArticulos extends FormRequest
     public function rules()
     {
         return [
-            // 'txtNombreArticulo' => 'required',
+            'txtNombreArticulo' => 'required',
             'txtTipoArticulo' => 'required',
             'txtMarcaArticulo' => 'required',
             'txtDescripcionArticulo' => 'required',
             'txtCantidadArticulo' => 'required|numeric',
             // 'txtFechaArticulo' => 'required|date',
             'txtPrecioCompraArticulo' => 'required',
+            'img' => 'required'
             // 'txtPrecioVentaArticulo' => 'required'
         ];
     }
