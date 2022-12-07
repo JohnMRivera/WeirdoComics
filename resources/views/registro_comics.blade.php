@@ -14,9 +14,17 @@
         )
     </script>
 
-@elseif(session()->has('eliminar_comic'))
+@elseif(session()->has('eliminado'))
 
     <script>
+        Swal.fire(
+              'Eliminado!',
+              'El Comic ha sido eliminado.',
+              'success'
+            )
+    </script>
+
+    {{-- <script>
         Swal.fire({
           title: '¿Estás seguro?',
           text: "¡No podrás revertir esto!",
@@ -34,7 +42,7 @@
             )
           }
         })
-    </script>
+    </script> --}}
 
 @elseif(session()->has('agregar_comic'))
 
@@ -161,9 +169,9 @@
                 @csrf
                 @method('delete')
                 <div class="c-c__seccion-carta__img">
-                    {{-- <img src="img/spiderman.jpeg" alt=""> --}}
+                    <img src="img/spiderman.jpeg" alt="">
                     {{-- {{ $comic->imagen }} --}}
-                    {{ echo "<img src='data:image/jpeg;base64,".base64_encode($comic->imagen)."'>"; }}
+                    {{-- {!! "<img src='data:image/jpeg;base64,".base64_encode($comic->imagen)."'>" !!} --}}
                 </div>
                 <div class="c-c__seccion-carta__contenido">
                     <div class="c-c__s-c__contenido-datos">
@@ -171,9 +179,9 @@
                         <label for="">Cantidad: {{ $comic->cantidad_comics }}</label>
                     </div>
                     <div class="c-c__s-c__contenido-op">
-                        <a href=" {{ route('eli_com') }} ">
+                        <button type="submit">
                             <img src="img/eliminar.png" alt="">
-                        </a>
+                        </button>
                     </div>
                 </div>
             </form>

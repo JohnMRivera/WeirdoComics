@@ -4,17 +4,52 @@
 
 @section('contenido')
 
+{{-- @include('layouts.plantilla') --}}
+
+@if(session()->has('añadido'))
+
+    {!! 
+        "<script> Swal.fire({
+            icon: 'success',
+            title: 'Articulo añadido, cantidad " . session()->get("añadido") . " de " . session()->get("cantidad") . "',
+            showConfirmButton: false,
+            timer: 2000
+        }) </script>"
+    !!}
+
+@elseif(session()->has('excedido'))
+
+    <script>
+        Swal.fire(
+            'Cantidad Excedida!',
+            'La cantidad de articulos añadida a alcanzado el limite!',
+            'error'
+        )
+    </script>
+
+@elseif(session()->has('no_disponible'))
+
+    <script>
+        Swal.fire(
+            'No disponible',
+            'El articulo no se encuentra en existencia!',
+            'error'
+        )
+    </script>
+
+@endif
+
 <main class="main-tienda">
-    <form class="form-tienda" action="" method="post">
+    <form class="form-tienda" action="{{ route('tienda.create', [$id_usuario]) }}" method="post">
         @csrf
         <header class="header-tienda">
-            <h1>Nuevo Articulo</h1>
+            <h1>Buscar Articulo</h1>
         </header>
         <div class="datos-tienda__scroll">
             <div class="datos-tienda">
                 <div>
                     <div class="input-reg_pro">
-                        <input name="txtNombreArticulo" type="text" value="{{ old('txtNombreArticulo') }}" placeholder="Nombre">
+                        <input name="txtNombreArticulo" type="text" value="{{ $nombre == "todos" ? '' : $nombre; }}" placeholder="Nombre">
                         <label for="">Nombre</label>
                     </div>
                 </div>
@@ -27,10 +62,23 @@
                     <div class="input-reg_pro">
                         {{-- <input type="text"> --}}
                         <select name="txtTipo" id="tipo">
-                            <option value="" disabled selected="">Tipo</option>
-                            <option value="todos">Todos</option>
-                            <option value="comics">Comics</option>
-                            <option value="articulos">Articulos</option>
+                            
+                            <option value="todos" disabled>Tipo</option>
+                            <option value="todos" 
+                            @if($tipo == "todos")
+                                selected = ""
+                            @endif
+                            >Todos</option>
+                            <option value="comics"
+                            @if($tipo == "comics")
+                                selected = ""
+                            @endif
+                            >Comics</option>
+                            <option value="articulos"
+                            @if($tipo == "articulos")
+                                selected = ""
+                            @endif
+                            >Articulos</option>
                         </select>
                         <label for="tipo">Tipo</label>
                     </div>
@@ -38,15 +86,82 @@
             </div>
         </div>
         <div class="btn-comics">
-            <button>
-                ¡Agregar!
+            <button name="btnBuscar" type="submit">
+                ¡Buscar!
             </button>
+            @if(isset($_POST['btnBuscar']))
+                @if($nombre == "")
+                    {{$nombre = "todos"}}
+                @endif
+            @endif
         </div>
     </form>
     <div class="contenido-tienda__scroll">
         <div class="contenido-tienda">
             {{-- <div class="contenido-tienda__seccion"> --}}
-                @for($i = 1; $i <= 7; $i++)
+                @foreach($comics as $comic)
+                <form class="c-c__seccion-carta" action="{{route('tienda.comic', [$id_usuario, $comic->id_comic, $comic->cantidad_comics])}}" method="post">
+                    @csrf
+                    <input type="hidden" name="txtNombreArticulo" value="{{$nombre}}">
+                    <input type="hidden" name="txtTipo" value="{{$tipo}}">
+                    {{-- <input type="hidden" name="txtIdUsuario" value="{{$id_usuario}}"> --}}
+                    {{-- <input type="hidden" name="txtIdComic" value="{{$comic->id_comic}}"> --}}
+                    {{-- <input type="hidden" name="txtTipo" value="comics"> --}}
+                    {{-- <input type="hidden" name="txtCantidad" value={{$comic->cantidad_comics}}> --}}
+                    <div class="c-c__seccion-carta__img">
+                        <img src="/img/spiderman.jpeg" alt="">
+                    </div>
+                    <div class="c-c__seccion-carta__contenido">
+                        <div class="c-c__s-c__contenido-datos">
+                            <label for="">Nombre: {{$comic->nombre_comic}}</label>
+                            <label style="{{$comic->cantidad_comics == 0 ? 'color: red; font-weight: bold' : ''}}" for="">Cantidad: {{$comic->cantidad_comics}}</label>
+                        </div>
+                        <div>
+                            <button>
+                                <p>Añadir</p>
+                            </button>
+                        </div>
+                        {{-- <div class="c-c__s-c__contenido-op">
+                            <a href=" {{ route('eli_com') }} ">
+                                <img src="img/eliminar.png" alt="">
+                            </a>
+                        </div> --}}
+                    </div>
+                </form>
+                @endforeach
+                @foreach($articulos as $articulo)
+
+                <form class="c-t__seccion-carta" action="{{route('tienda.articulo', [$id_usuario, $articulo->id_articulo, $articulo->cantidad_articulos])}}" method="post">
+                    @csrf
+                    <input type="hidden" name="txtNombreArticulo" value="{{$nombre}}">
+                    <input type="hidden" name="txtTipoBusqueda" value="{{$tipo}}">
+                    <input type="hidden" name="txtIdUsuario" value="{{$id}}">
+                    <input type="hidden" name="txtIdComic" value="{{$articulo->id_articulo}}">
+                    {{-- <input type="hidden" name="txtTipo" value="articulos"> --}}
+                    <input type="hidden" name="txtCantidad" value={{$articulo->cantidad_articulos}}>
+                    <div class="c-t__seccion-carta__img">
+                        <img src="/img/cell.jpeg" alt="">
+                    </div>
+                    <div class="c-t__seccion-carta__contenido">
+                        <div class="c-t__s-c__contenido-datos">
+                            <label for="">Tipo: {{$articulo->tipo}}</label>
+                            <label style="{{$articulo->cantidad_articulos == 0 ? 'color: red; font-weight: bold' : ''}}" for="">Cantidad: {{$articulo->cantidad_articulos}}</label>
+                        </div>
+                        <div>
+                            <button>
+                                <p>Añadir</p>
+                            </button>
+                        </div>
+                        {{-- <div class="c-t__s-c__contenido-op">
+                            <a href="">
+                                <img src="img/eliminar.png" alt="">
+                            </a>
+                        </div> --}}
+                    </div>
+                </form>
+
+                @endforeach
+                @for($i = 1; $i <= 0; $i++)
                 <div class="c-c__seccion-carta">
                     <div class="c-c__seccion-carta__img">
                         <img src="img/spiderman.jpeg" alt="">
@@ -56,11 +171,11 @@
                             <label for="">Nombre Comic</label>
                             <label for="">Cantidad</label>
                         </div>
-                        <div class="c-c__s-c__contenido-op">
+                        {{-- <div class="c-c__s-c__contenido-op">
                             <a href=" {{ route('eli_com') }} ">
                                 <img src="img/eliminar.png" alt="">
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="c-c__seccion-carta">
@@ -72,11 +187,11 @@
                             <label for="">Nombre Comic</label>
                             <label for="">Cantidad</label>
                         </div>
-                        <div class="c-c__s-c__contenido-op">
+                        {{-- <div class="c-c__s-c__contenido-op">
                             <a href=" {{ route('eli_com') }} ">
                                 <img src="img/eliminar.png" alt="">
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="c-c__seccion-carta">
@@ -104,11 +219,11 @@
                             <label for="">Nombre Comic</label>
                             <label for="">Cantidad</label>
                         </div>
-                        <div class="c-c__s-c__contenido-op">
+                        {{-- <div class="c-c__s-c__contenido-op">
                             <a href=" {{ route('eli_com') }} ">
                                 <img src="img/eliminar.png" alt="">
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                     @for($j = 1; $j <= 2; $j++)
@@ -121,11 +236,11 @@
                                 <label for="">Nombre Articulo</label>
                                 <label for="">Cantidad</label>
                             </div>
-                            <div class="c-t__s-c__contenido-op">
+                            {{-- <div class="c-t__s-c__contenido-op">
                                 <a href="">
                                     <img src="img/eliminar.png" alt="">
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="c-t__seccion-carta">
@@ -137,11 +252,11 @@
                                 <label for="">Nombre Articulo</label>
                                 <label for="">Cantidad</label>
                             </div>
-                            <div class="c-t__s-c__contenido-op">
+                            {{-- <div class="c-t__s-c__contenido-op">
                                 <a href="">
                                     <img src="img/eliminar.png" alt="">
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     @endfor
@@ -149,171 +264,10 @@
             {{-- </div> --}}
         </div>
     </div>
-  </main>
-
-
-
-{{-- 
-<div class="cont-tienda">
-    <div class="icono">
-        <a href="{{route('shCar')}}"><img class="img-tienda" src="/img/carrito-de-compras.png" alt=""></a>
-    </div class="icono">
-    <div class="row row-cols-1 row-cols-md-3 g-4 cont-cards">
-        <div class="col">
-            <div class="card" id="card-color">
-                <img src="/img/spiderman.jpg" class="card-img-top img-card" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Comic #1 Amazing Fantasy</h5>
-                    <p class="card-text">Hay en existencia: <label for="">5</label> piezas </p>
-                    <div class="tienda-selec">
-                        <button type="button" class="btn btn-primary">Comprar</button>
-                        <div class="iconos">
-                            <a href="" class="icon-a"><img src="/img/basura.png" alt="Eliminar"></a>
-                            <a href="" class=""><img src="/img/editar.png" alt="Editar"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card" id="card-color">
-                <img src="/img/superman.jpeg" class="card-img-top img-card" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Comic #116 Superman Infinitte Crisis</h5>
-                    <p class="card-text">Hay en existencia: <label for="">5</label> piezas </p>
-                    <div class="tienda-selec">
-                        <button type="button" class="btn btn-primary">Comprar</button>
-                        <div class="iconos">
-                            <a href="" class="icon-a"><img src="/img/basura.png" alt=""></a>
-                            <a href="" class=""><img src="/img/editar.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col">
-            <div class="card" id="card-color">
-                <img src="/img/spiderman.jpeg" class="card-img-top img-card" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Comic #20 The Amazing Spiderman</h5>
-                    <p class="card-text">Hay en existencia: <label for="">5</label> piezas </p>
-                    <div class="tienda-selec">
-                        <button type="button" class="btn btn-primary">Comprar</button>
-                        <div class="iconos">
-                            <a href="" class="icon-a"><img src="/img/basura.png" alt=""></a>
-                            <a href="" class=""><img src="/img/editar.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card" id="card-color">
-                <img src="/img/Avengers.jpeg" class="card-img-top img-card" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Comic #5 The Avengers</h5>
-                    <p class="card-text">Hay en existencia: <label for="">5</label> piezas </p>
-                    <div class="tienda-selec">
-                        <button type="button" class="btn btn-primary">Comprar</button>
-                        <div class="iconos">
-                            <a href="" class="icon-a"><img src="/img/basura.png" alt=""></a>
-                            <a href="" class=""><img src="/img/editar.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card" id="card-color">
-                <img src="/img/Secret.jpeg" class="card-img-top img-card" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Comic #20 Secret Avengers</h5>
-                    <p class="card-text">Hay en existencia: <label for="">5</label> piezas </p>
-                    <div class="tienda-selec">
-                        <button type="button" class="btn btn-primary">Comprar</button>
-                        <div class="iconos">
-                            <a href="" class="icon-a"><img src="/img/basura.png" alt=""></a>
-                            <a href="" class=""><img src="/img/editar.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card" id="card-color">
-                <img src="/img/x-men.jpeg" class="card-img-top img-card" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Comic #24 X-men</h5>
-                    <p class="card-text">Hay en existencia: <label for="">5</label> piezas </p>
-                    <div class="tienda-selec">
-                        <button type="button" class="btn btn-primary">Comprar</button>
-                        <div class="iconos">
-                            <a href="" class="icon-a"><img src="/img/basura.png" alt=""></a>
-                            <a href="" class=""><img src="/img/editar.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card" id="card-color">
-                <img src="/img/Pinocho.jpeg" class="card-img-top img-card" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Funco de Pinocho</h5>
-                    <p class="card-text">Hay en existencia: <label for="">5</label> piezas </p>
-                    <div class="tienda-selec">
-                        <button type="button" class="btn btn-primary">Comprar</button>
-                        <div class="iconos">
-                            <a href="" class="icon-a"><img src="/img/basura.png" alt=""></a>
-                            <a href="" class=""><img src="/img/editar.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card" id="card-color">
-                <img src="/img/DocStrange.jpeg" class="card-img-top img-card" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Funco de Doctor Strange</h5>
-                    <p class="card-text">Hay en existencia: <label for="">5</label> piezas </p>
-                    <div class="tienda-selec">
-                        <button type="button" class="btn btn-primary">Comprar</button>
-                        <div class="iconos">
-                            <a href="" class="icon-a"><img src="/img/basura.png" alt=""></a>
-                            <a href="" class=""><img src="/img/editar.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card" id="card-color">
-                <img src="/img/cell.jpeg" class="card-img-top img-card" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Funco de Cell</h5>
-                    <p class="card-text">Hay en existencia: <label for="">5</label> piezas </p>
-                    <div class="tienda-selec">
-                        <button type="button" class="btn btn-primary">Comprar</button>
-                        <div class="iconos">
-                            <a href="" class="icon-a"><img src="/img/basura.png" alt=""></a>
-                            <a href="" class=""><img src="/img/editar.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-      </div>
-</div> --}}
-
+    <div class="op-carrito">
+        <a href="{{route('carrito.index', $id_usuario)}}">
+            <img src="/img/carrito-de-compras.png" alt="">
+        </a>
+    </div>
+</main>
 @stop
