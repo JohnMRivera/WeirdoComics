@@ -20,11 +20,11 @@
         <table class="table table-bordered mt-5">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Nombre de Usuario</th>
-                    <th>Canitdad</th>
-                    <th>Fecha</th>
-                    <th>Total</th>
+                    <th class="tabla">#</th>
+                    <th class="tabla">Nombre de Usuario</th>
+                    <th class="tabla">Canitdad</th>
+                    <th class="tabla">Fecha</th>
+                    <th class="tabla">Total</th>
 
                 </tr>
             </thead>
