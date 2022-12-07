@@ -6,6 +6,8 @@ use App\Http\Controllers\ControladorUsuariosBD;
 use App\Http\Controllers\ControladorComicsBD;
 use App\Http\Controllers\ControladorArticulosBD;
 use App\Http\Controllers\ControladorProveedoresBD;
+use App\Http\Controllers\ControladorTienda;
+use App\Http\Controllers\ControladorCarritoBD;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +36,7 @@ Route::controller(ControladorVistas::class)->group(function(){
     // Route::get('ventas_mostrador','vistaVentasM')->name('venm');
     Route::get('registro_proveedores', 'vistaRegistroProveedores')->name('reg_pro');
     Route::get('tienda','vistaTienda')->name('shop');
-    Route::get('carrito', 'vistaCarrito')->name('shCar');
+    // Route::get('carrito', 'vistaCarrito')->name('car');
 
     // Route::post('agregar_comic', 'AgregarComic')->name('addCom');
     // Route::post('agregar_proveedor', 'AgregarProveedor')->name('addProv');
@@ -78,13 +80,14 @@ Route::controller(ControladorUsuariosBD::class)->group(function(){
 Route::controller(ControladorComicsBD::class)->group(function(){
     Route::get('comic','create')->name('comic.create');
     Route::post('comic/store','store')->name('comic.store');
-    Route::delete('comic/destroy','destroy')->name('comic.destroy');
+    Route::delete('comic/{id}/destroy','destroy')->name('comic.destroy');
 });
 
 // Articulos
 Route::controller(ControladorArticulosBD::class)->group(function(){
     Route::get('articulo','create')->name('articulo.create');
     Route::post('articulo/store','store')->name('articulo.store');
+    Route::delete('articulo/{id}/destroy','destroy')->name('articulo.destroy');
 });
 
 // Proveedores
@@ -94,6 +97,20 @@ Route::controller(ControladorProveedoresBD::class)->group(function(){
     Route::get('proveedor_index','index')->name('proveedor.index');
 
     Route::delete('proveedor/{id}/destroy','destroy')->name('proveedor.destroy');
+});
+
+// Tienda
+Route::controller(ControladorTienda::class)->group(function(){
+    Route::get('tienda/{id_usuario}/{nombre}/{tipo}','index')->name('tienda.index');
+    Route::post('tienda_create/{id_usuario}','create')->name('tienda.create');
+});
+
+// Carrito
+Route::controller(ControladorCarritoBD::class)->group(function(){
+    Route::get('carrito/{id_usuario}','index')->name('carrito.index');
+    Route::post('tienda_carrito_comic/{id_usuario}/{id_comic}/{cantidadDisponible}','ingresarComic')->name('tienda.comic');
+    Route::post('tienda_carrito_articulo/{id_usuario}/{id_articulo}/{cantidadDisponible}','ingresarArticulo')->name('tienda.articulo');
+    Route::post('carrito/create/{id_usuario}','create')->name('carrito.create');
 });
 
 // Route::get('proveedor/index',[ControladorProveedoresBD::class, 'index'])->name('proveedor.index');
