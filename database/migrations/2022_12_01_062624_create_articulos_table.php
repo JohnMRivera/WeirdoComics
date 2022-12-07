@@ -19,10 +19,12 @@ return new class extends Migration
             $table->foreign('id_pedido')->references('id_pedido')->on('pedidos');
             $table->unsignedBigInteger('id_venta')->nullable();
             $table->foreign('id_venta')->references('id_venta')->on('ventas_mostrador');
+            $table->string('nombre_articulo');
             $table->string('tipo');
             $table->string('marca');
             $table->string('descripcion');
             $table->integer('cantidad_articulos');
+            $table->binary('imagen');
             $table->integer('precio_compra');
             $table->integer('precio_venta');
             $table->date('fecha');
