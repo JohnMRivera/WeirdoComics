@@ -103,15 +103,7 @@
                     @endif
                     </div>
                 </div>
-                {{-- <div>
-                    <div class="input">
-                        <input name="txtFechaComic" type="date" value="{{ old('txtFechaComic') }}" placeholder="Fecha">
-                        <label for="">Fecha</label>
-                    </div>
-                </div>
-                @if($errors->first('txtFechaComic'))
-                    <p> {{ $errors->first('txtFechaComic') }} </p>
-                @endif --}}
+
                 <div>
                     <div class="input">
                         <input name="txtPrecioCompraComic" type="text" value="{{ old('txtPrecioCompraComic') }}" placeholder="Precio Compra">

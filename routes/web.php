@@ -80,6 +80,7 @@ Route::controller(ControladorComicsBD::class)->group(function(){
     Route::get('comic','create')->name('comic.create');
     Route::post('comic/store','store')->name('comic.store');
     Route::delete('comic/destroy','destroy')->name('comic.destroy');
+    Route::get('comic/index', 'index')->name('comic.index');
 });
 
 // Articulos

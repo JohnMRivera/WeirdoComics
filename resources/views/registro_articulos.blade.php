@@ -129,7 +129,6 @@
             <button>
                 ¡Agregar!
             </button>
-            <a href="{{ route('articulos.pdf') }}" class="btn btn-success btn-sm">Export to PDF</a>
         </div>
     </form>
     <div class="contenido-articulos__scroll">

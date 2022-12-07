@@ -49,15 +49,12 @@ class ControladorComicsBD extends Controller
         return redirect('comic')->with('registrado','xxxx');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
+        $datos = DB::table('comics')->where('id_comics', $id)->first();
+
+        return view('registro_comics', compact('datos'));
     }
 
     /**
@@ -78,9 +75,17 @@ class ControladorComicsBD extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidadorRegistroComics $req, $id)
     {
-        //
+        DB::table('comics')->where('id_comic', $id)->update([
+            'nombre_comic' => $req->input('txtNombreComic'),
+            'edicion' => $req->input('txtEdicionComic'),
+            'compañia' => $req->input('txtCompañiaComic'),
+            'cantidad_comics' => $req->input('txtCantidadComic'),
+            'imagen' => $req->input('input-file_input'),
+            'precio_compra' => $req->input('txtPrecioCompraComic')
+        ]);
+        return redirect('comic.index')->with('ediconCompletada', 'xxxx');
     }
 
     /**

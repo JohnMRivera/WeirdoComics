@@ -63,7 +63,9 @@ class ControladorArticulosBD extends Controller
 
     public function edit($id)
     {
-        //
+        $datos = DB::table('articulos')->where('id_articulos', $id)->first();
+
+        return view('registro_articulos', compact('datos'));
     }
 
 
