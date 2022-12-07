@@ -26,7 +26,9 @@ class ControladorArticulosBD extends Controller
      */
     public function create()
     {
-        return view('registro_articulos');
+        $articulos = DB::table('articulos')->get();
+
+        return view('registro_articulos', compact('articulos'));
     }
 
     /**
@@ -35,16 +37,17 @@ class ControladorArticulosBD extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidadorRegistroArticulos $request)
     {
         DB::table('articulos')->insert([
-            // 'nombre_articulo' => $request->input('txtNombreArticulo'),
+            'nombre_articulo' => $request->input('txtNombreArticulo'),
             'tipo' => $request->input('txtTipoArticulo'),
             'marca' => $request->input('txtMarcaArticulo'),
             'descripcion' => $request->input('txtDescripcionArticulo'),
             'cantidad_articulos' => $request->input('txtCantidadArticulo'),
             'precio_compra' => $request->input('txtPrecioCompraArticulo'),
             'precio_venta' => $request->input('txtPrecioCompraArticulo') * 1.4,
+            'imagen' => $request->input('img'),
             'fecha' => Carbon::now(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
@@ -95,6 +98,8 @@ class ControladorArticulosBD extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('articulos')->where('id_articulo', $id)->delete();
+
+        return redirect('articulo')->with('eliminado','xxxx');
     }
 }

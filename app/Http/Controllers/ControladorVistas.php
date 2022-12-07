@@ -7,13 +7,18 @@ use App\Http\Requests\ValidadorPedidos;
 use App\Http\Requests\ValidadorLogin;
 use App\Http\Requests\ValidadorRegistroUsuario;
 use App\Http\Requests\ValidadorRegistroComics;
-use App\Http\Requests\VistaSingUp;
+use App\Http\Requests\ValidadorRegistroArticulos;
+use App\Http\Requests\ValidadorRegistroProveedores;
+use App\Http\Requests\ValidadorTienda;
+use DB;
 
 class ControladorVistas extends Controller
 {
     
     public function vistaMenu(Request $request){
-        return view('menu');
+        $comics = DB::table('comics')->get();
+
+        return view('menu', compact('comics'));
     }
 
     public function vistaProveedores(){
@@ -56,49 +61,74 @@ class ControladorVistas extends Controller
         return redirect()->route('ped')->with('agregar_articulo','Se agrego el articulo');
     }
 
-    public function eliminarArticulo(){
+    public function eliminarArticuloPedido(){
         return redirect()->route('ped')->with('eliminar_articulo','Se elimino el articulo correctamente');
     }
 
-    public function vistaCarrito(){
-        return view('carrito');
-    }
+    // public function vistaCarrito(){
+    //     return view('carrito');
+    // }
 
     public function vistaTienda(){
         return view('tienda');
     }
 
-    public function vistaRegistroPro(){
-        return view('registro_Proveedores');
+    public function vistaRegistroProveedores(){
+        return view('registro_proveedores');
     }
     
     public function procesarLogin(ValidadorLogin $request){
-        $usuario = $_POST['txtUsuario'];
-        // $usuario = $request->input('txtUsuario');
+        // $correo = $_POST['txtCorreo'];
+        $correo = $request->input('txtCorreo');
+        $contra = $request->input('txtContra');
 
-        return redirect()->route('ini')->with('logeo_confirmado',$usuario);
+        $datos = DB::table('usuarios')->where('correo', $correo)->where('contra', $contra)->get();
+
+        if(count($datos) > 0){
+            foreach($datos as $dato){
+                session_start();
+
+                $_SESSION['nombre'] = $dato->nombre_usuario;
+                $_SESSION['id'] = $dato->id_usuario;
+            }
+
+            return redirect()->route('ini')->with('ingresado',$correo);
+        } else {
+            return redirect('/')->with('incorrecto','xxxx');
+        }
     }
 
-    public function procesarRegistroUsuario(ValidadorRegistroUsuario $request){
-        return redirect()->route('reg_usu')->with('registro_usuario_confirmado','El registro de Usario ha sido exitoso');
-    }
+    // public function procesarRegistroUsuario(ValidadorRegistroUsuario $request){
+    //     return redirect()->route('reg_usu')->with('registro_usuario_confirmado','El registro de Usario ha sido exitoso');
+    // }
+
+    // public function agregarComic(ValidadorRegistroComics $request){
+    //     $nombre = $request->input('txtNombreComic');
+
+    //     return redirect()->route('reg_com')->with('agregar_comic',$nombre);
+    // }
 
     public function eliminarComic(){
         return redirect()->route('reg_com')->with('eliminar_comic','El comic ha sido eliminado');
     }
 
-    public function agregarComic(ValidadorRegistroComics $request){
-        $nombre = $request->input('txtNombreComic');
+    // public function agregarArticulo(ValidadorRegistroArticulos $request){
+    //     $nombre = $request->input('txtNombreArticulo');
 
-        return redirect()->route('reg_com')->with('agregar_comic',$nombre);
+    //     return redirect()->route('reg_art')->with('agregar_articulo',$nombre);
+    // }
+
+    public function eliminarArticulo(){
+
     }
-
-
-
 
     public function generarPedido(){
         return redirect()->route('ped')->with('generar_pedido','El pedido ha sido generado');
     }
+
+    // public function agregarProveedor(ValidadorRegistroProveedores $request){
+    //     return redirect()->route('reg_pro')->with('agregar_proveedor','El proveedor ha sido registrado exitosamente');
+    // }
 
     // public function vistaSingUp(){
     //     return view('singup');
@@ -127,4 +157,20 @@ class ControladorVistas extends Controller
     //     $Usuario=$req->input('TxtUsuario');
     //     return redirect()->route('Up')->with('confirmacion',$Usuario);
     // }
+
+    public function buscarTienda(ValidadorTienda $request){
+        $nombre = $request->input('txtNombreArticulo');
+        $tipo = $request->input('txtTipo');
+
+        if($tipo == "Todos"){
+            $consultas = DB::table('comics')->get();
+            $consultas += DB::table('articulos')->get();
+        } else if($tipo == "Comics"){
+            $consultas = DB::table('comics')->get();
+        } else if($tipo == "Articulos"){
+            $consultas = DB::table('articulos')->get();
+        }
+
+        return redirect('');
+    }
 }
