@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
 use App\Http\Requests\ValidadorTienda;
+use App\Http\Requests\ValidadorReporte;
+use PDF;
 
 class ControladorTienda extends Controller
 {
@@ -58,6 +60,33 @@ class ControladorTienda extends Controller
         }
 
         return redirect()->route('tienda.index', [$id_usuario, $nombre, $tipo]);
+    }
+
+    public function generarReporte(ValidadorReporte $request, $id_usuario){
+        $fecha = $request->input('txtFecha');
+        $tipo = $request->input('txtTipoReporte');
+
+        $ventas = [];
+
+        if($tipo == "dia"){
+            $fecha_dia = date('d', strtotime($fecha));
+            $fecha_mes = date('m', strtotime($fecha));
+
+            $ventas = DB::table('ventas_mostrador')->where('fecha', 'like', '%-' . $fecha_mes . '-' . $fecha_dia . '%')->get();
+        } else if($tipo == "mes"){
+            $fecha_mes = date('m', strtotime($fecha));
+
+            $ventas = DB::table('ventas_mostrador')->where('fecha', 'like', '%-' . $fecha_mes . '-%')->get();
+        } else if($tipo == "empleado"){
+            $ventas = DB::table('ventas_mostrador')->where('id_usuario', $id_usuario)->get();
+        }
+
+        foreach($ventas as $venta){
+            echo $venta->id_venta;
+        }
+
+        $pdf = PDF::loadView('reporte_ventas', ['ventas' => $ventas]);
+        return $pdf->download('Reporte de Ventas.pdf');
     }
 
     /**

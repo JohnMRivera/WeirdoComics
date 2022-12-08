@@ -65,17 +65,6 @@
         </header>
         <div class="datos-articulos__scroll">
             <div class="datos-articulos">
-                {{-- <div>
-                    <div class="input">
-                        <input name="txtNombreArticulo" type="text" value="{{ old('txtNombreArticulo') }}" placeholder="Nombre">
-                        <label for="">Nombre</label>
-                    </div>
-                </div>
-                @if($errors->first('txtNombreArticulo'))
-                    <div class="alert">
-                        <p> {{ $errors->first('txtNombreArticulo') }} </p>
-                    </div>
-                @endif --}}
                 <div>
                     <div class="input">
                         <input name="txtNombreArticulo" type="text" value="{{ old('txtNombreArticulo') }}" placeholder="Nombre">
@@ -141,17 +130,6 @@
                         @endif
                     </div>
                 </div>
-                {{-- <div>
-                    <div class="input">
-                        <input name="txtFechaArticulo" type="date" value="{{ old('txtFechaArticulo') }}" placeholder="Fecha">
-                        <label for="">Fecha</label>
-                    </div>
-                </div>
-                @if($errors->first('txtFechaArticulo'))
-                    <div class="alert">
-                        <p> {{ $errors->first('txtFechaArticulo') }} </p>
-                    </div>
-                @endif --}}
                 <div>
                     <div class="input">
                         <input name="txtPrecioCompraArticulo" type="text" value="{{ old('txtPrecioCompraArticulo') }}" placeholder="Precio Compra">
@@ -178,17 +156,6 @@
                     @endif
                     </div>
                 </div>
-                {{-- <div>
-                    <div class="input">
-                        <input name="txtPrecioVentaArticulo" type="text" value="{{ old('txtPrecioVentaArticulo') }}" placeholder="Precio Venta">
-                        <label for="">Precio Venta</label>
-                    </div>
-                </div>
-                @if($errors->first('txtPrecioVentaArticulo'))
-                    <div class="alert">
-                        <p> {{ $errors->first('txtPrecioVentaArticulo') }} </p>
-                    </div>
-                @endif --}}
             </div>
         </div>
         <div class="btn-comics">
@@ -214,6 +181,9 @@
                             <label for="">Cantidad: {{ $articulo->cantidad_articulos }}</label>
                         </div>
                         <div class="c-a__s-c__contenido-op">
+                            <a href="{{ route('articulo.edit', $articulo->id_articulo) }}">
+                                <img src="img/editar.png" alt="">
+                            </a>
                             <button type="submit">
                                 <img src="img/eliminar.png" alt="">
                             </button>

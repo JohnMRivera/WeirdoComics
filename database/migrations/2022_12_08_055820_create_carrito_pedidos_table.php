@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('carrito', function (Blueprint $table) {
-            $table->id('id_carrito');
+        Schema::create('carrito_pedidos', function (Blueprint $table) {
+            $table->id('id_carrito_pedido');
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id_usuario')->on('usuarios');
-            $table->integer('id_articulo');
-            $table->string('tipo');
-            // $table->unsignedBigInteger('id_comic')->nullable();
-            // $table->foreign('id_comic')->references('id_comic')->on('comics');
-            // $table->unsignedBigInteger('id_articulo')->nullable();
-            // $table->foreign('id_articulo')->references('id_articulo')->on('articulos');
+            $table->unsignedBigInteger('id_proveedor');
+            $table->foreign('id_proveedor')->references('id_proveedor')->on('proveedores');
+            $table->string('nombre');
             $table->integer('cantidad');
+            $table->integer('precio');
             $table->timestamps();
         });
     }
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_carrito');
+        Schema::dropIfExists('carrito_pedidos');
     }
 };

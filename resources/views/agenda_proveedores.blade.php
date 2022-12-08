@@ -45,7 +45,7 @@
                         @csrf
                         @method('delete')
                         <div class="c-p__lista-foto">
-                            <img src="img/siu.png" alt="">
+                            <img src="/img/siu.png" alt="">
                         </div>
                         <div class="c-p__lista-datos">
                             <label for="">Empresa: {{ $proveedor->empresa }}</label>
@@ -62,13 +62,13 @@
                         </div>
                         <div class="c-p__lista-op">
                             <button> 
-                                <img src="img/eliminar.png" alt="">
+                                <img src="/img/eliminar.png" alt="">
                             </button>
-                            <a> 
-                                <img src="img/recargar.png" alt=""> 
+                            <a href="{{ route('proveedor.edit', $proveedor->id_proveedor) }}"> 
+                                <img src="/img/recargar.png" alt=""> 
                             </a>
-                            <a href=" {{ route('ped') }} "> 
-                                <img src="img/pedido.png" alt=""> 
+                            <a href=" {{ route('pedido.create', [$proveedor->id_proveedor, $id_usuario, 'todos', 'vacio']) }} "> 
+                                <img src="/img/pedido.png" alt=""> 
                             </a>
                         </div>
                     </div>

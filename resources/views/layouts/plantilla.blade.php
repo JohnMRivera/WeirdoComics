@@ -24,18 +24,26 @@ session_start()
             </label>
             <input class="menu-input" id="check" type="checkbox">
             <ul class="menu-op">
-                <li class="menu-op__titulo"><a href=" {{ route('ini') }} ">Weirdo Comics</a></li>
-                <li class="menu-op__item"><a href=" {{ route('comic.create') }} ">Comics</a>
+                <li class="menu-op__titulo">
+                    <a href=" {{ route('ini') }} ">Weirdo Comics</a>
                 </li>
-                <li class="menu-op__item"><a href=" {{ route('articulo.create') }} ">Articulos</a>
+                @if($_SESSION['rol'] == "SuperUsuario")
+                <li class="menu-op__item">
+                    <a href=" {{ route('comic.create') }} ">Comics</a>
                 </li>
+                <li class="menu-op__item">
+                    <a href=" {{ route('articulo.create') }} ">Articulos</a>
+                </li>
+                @endif
                 <li class="menu-op__item"><a href=" {{ route('tienda.index',[$_SESSION['id'],'todos','todos']) }} ">En Tienda</a></li>
+                @if($_SESSION['rol'] == "SuperUsuario")
                 <li class="menu-op__item"><a href="">Proveedores</a>
                     <ul>
-                        <li><a href=" {{ route('proveedor.index') }} ">Consultar</a></li>
+                        <li><a href=" {{ route('proveedor.index', $_SESSION['id']) }} ">Consultar</a></li>
                         <li><a href=" {{ route('proveedor.create') }} ">Registrar</a></li>
                     </ul>
                 </li>
+                @endif
                 <li class="menu-op__sesion">
                     <label class="sesion_usuario" for="">
                         {{$_SESSION['nombre']}}

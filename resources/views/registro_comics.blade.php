@@ -14,6 +14,16 @@
         )
     </script>
 
+@elseif(session()->has('editado'))
+
+    <script>
+        Swal.fire(
+            'Actualizado!',
+            'El comic ha sido actualizado!',
+            'success'
+        )
+    </script>
+
 @elseif(session()->has('eliminado'))
 
     <script>
@@ -111,15 +121,6 @@
                     @endif
                     </div>
                 </div>
-                {{-- <div>
-                    <div class="input">
-                        <input name="txtFechaComic" type="date" value="{{ old('txtFechaComic') }}" placeholder="Fecha">
-                        <label for="">Fecha</label>
-                    </div>
-                </div>
-                @if($errors->first('txtFechaComic'))
-                    <p> {{ $errors->first('txtFechaComic') }} </p>
-                @endif --}}
                 <div>
                     <div class="input">
                         <input name="txtPrecioCompraComic" type="text" value="{{ old('txtPrecioCompraComic') }}" placeholder="Precio Compra">
@@ -179,6 +180,9 @@
                         <label for="">Cantidad: {{ $comic->cantidad_comics }}</label>
                     </div>
                     <div class="c-c__s-c__contenido-op">
+                        <a href="{{ route('comic.edit', $comic->id_comic) }}">
+                            <img src="img/editar.png" alt="">
+                        </a>
                         <button type="submit">
                             <img src="img/eliminar.png" alt="">
                         </button>

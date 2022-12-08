@@ -40,62 +40,120 @@
 @endif
 
 <main class="main-tienda">
-    <form class="form-tienda" action="{{ route('tienda.create', [$id_usuario]) }}" method="post">
-        @csrf
-        <header class="header-tienda">
-            <h1>Buscar Articulo</h1>
-        </header>
-        <div class="datos-tienda__scroll">
-            <div class="datos-tienda">
-                <div>
-                    <div class="input-reg_pro">
-                        <input name="txtNombreArticulo" type="text" value="{{ $nombre == "todos" ? '' : $nombre; }}" placeholder="Nombre">
-                        <label for="">Nombre</label>
+    <div class="tienda-formularios">
+        <form class="form-tienda" action="{{ route('tienda.create', [$id_usuario]) }}" method="post">
+            @csrf
+            <header class="header-tienda">
+                <h1>Buscar Articulo</h1>
+            </header>
+            <div class="datos-tienda__scroll">
+                <div class="datos-tienda">
+                    <div>
+                        <div class="input-reg_pro">
+                            <input name="txtNombreArticulo" type="text" value="{{ $nombre == "todos" ? '' : $nombre; }}" placeholder="Nombre">
+                            <label for="">Nombre</label>
+                        </div>
                     </div>
-                </div>
-                @if($errors->first('txtNombreArticulo'))
-                    <div class="alert">
-                        <p> {{ $errors->first('txtNombreArticulo') }} </p>
-                    </div>
-                @endif
-                <div>
-                    <div class="input-reg_pro">
-                        {{-- <input type="text"> --}}
-                        <select name="txtTipo" id="tipo">
-                            
-                            <option value="todos" disabled>Tipo</option>
-                            <option value="todos" 
-                            @if($tipo == "todos")
-                                selected = ""
-                            @endif
-                            >Todos</option>
-                            <option value="comics"
-                            @if($tipo == "comics")
-                                selected = ""
-                            @endif
-                            >Comics</option>
-                            <option value="articulos"
-                            @if($tipo == "articulos")
-                                selected = ""
-                            @endif
-                            >Articulos</option>
-                        </select>
-                        <label for="tipo">Tipo</label>
+                    @if($errors->first('txtNombreArticulo'))
+                        <div class="alert">
+                            <p> {{ $errors->first('txtNombreArticulo') }} </p>
+                        </div>
+                    @endif
+                    <div>
+                        <div class="input-reg_pro">
+                            {{-- <input type="text"> --}}
+                            <select name="txtTipo" id="tipo">
+                                
+                                <option value="todos" disabled>Tipo</option>
+                                <option value="todos" 
+                                @if($tipo == "todos")
+                                    selected = ""
+                                @endif
+                                >Todos</option>
+                                <option value="comics"
+                                @if($tipo == "comics")
+                                    selected = ""
+                                @endif
+                                >Comics</option>
+                                <option value="articulos"
+                                @if($tipo == "articulos")
+                                    selected = ""
+                                @endif
+                                >Articulos</option>
+                            </select>
+                            <label for="tipo">Tipo</label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="btn-comics">
-            <button name="btnBuscar" type="submit">
-                ¡Buscar!
-            </button>
-            @if(isset($_POST['btnBuscar']))
-                @if($nombre == "")
-                    {{$nombre = "todos"}}
+            <div class="btn-comics">
+                <button name="btnBuscar" type="submit">
+                    ¡Buscar!
+                </button>
+                @if(isset($_POST['btnBuscar']))
+                    @if($nombre == "")
+                        {{$nombre = "todos"}}
+                    @endif
                 @endif
-            @endif
-        </div>
-    </form>
+            </div>
+        </form>
+        <form class="form-tienda" action="{{ route('tienda.reporte', $id_usuario) }}" method="post">
+            @csrf
+            <header class="header-tienda">
+                <h1>Generar Reporte!</h1>
+            </header>
+            <div class="datos-tienda__scroll">
+                <div class="datos-tienda">
+                    <div>
+                        <div class="input-reg_pro">
+                            <input name="txtFecha" type="date" value="{{ old('txtFecha') }}" placeholder="Fecha">
+                            <label for="">Fecha</label>
+                        </div>
+                        @if($errors->first('txtFecha'))
+                            <div class="alert2">
+                                <p> {{ $errors->first('txtFecha') }} </p>
+                            </div>
+                        @endif
+                    </div>
+                    <div>
+                        <div class="input-reg_pro">
+                            {{-- <input type="text"> --}}
+                            <select name="txtTipoReporte" id="tipo">
+                                
+                                <option value="todos" disabled>Tipo</option>
+                                <option value="dia"
+                                @if($tipo == "dia")
+                                    selected = ""
+                                @endif
+                                >Día</option>
+                                <option value="mes"
+                                @if($tipo == "mes")
+                                    selected = ""
+                                @endif
+                                >Mes</option>
+                                <option value="empleado" 
+                                @if($tipo == "empleado")
+                                    selected = ""
+                                @endif
+                                >Empleado</option>
+                            </select>
+                            <label for="tipo">Tipo</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-comics">
+                <button name="btnBuscar" type="submit">
+                    Generar!
+                </button>
+                @if(isset($_POST['btnBuscar']))
+                    @if($nombre == "")
+                        {{$nombre = "todos"}}
+                    @endif
+                @endif
+            </div>
+        </form>
+    </div>
     <div class="contenido-tienda__scroll">
         <div class="contenido-tienda">
             {{-- <div class="contenido-tienda__seccion"> --}}
@@ -117,7 +175,7 @@
                             <label style="{{$comic->cantidad_comics == 0 ? 'color: red; font-weight: bold' : ''}}" for="">Cantidad: {{$comic->cantidad_comics}}</label>
                         </div>
                         <div>
-                            <button>
+                            <button class="btn-añadir">
                                 <p>Añadir</p>
                             </button>
                         </div>
@@ -148,7 +206,7 @@
                             <label style="{{$articulo->cantidad_articulos == 0 ? 'color: red; font-weight: bold' : ''}}" for="">Cantidad: {{$articulo->cantidad_articulos}}</label>
                         </div>
                         <div>
-                            <button>
+                            <button class="btn-añadir">
                                 <p>Añadir</p>
                             </button>
                         </div>

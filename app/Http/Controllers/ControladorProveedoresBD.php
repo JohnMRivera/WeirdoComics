@@ -14,11 +14,11 @@ class ControladorProveedoresBD extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_usuario)
     {
         $proveedores = DB::table('proveedores')->get();
 
-        return view('agenda_proveedores', compact('proveedores'));
+        return view('agenda_proveedores', compact(['proveedores', 'id_usuario']));
         // return view('agenda_proveedores');
     }
 
@@ -74,7 +74,9 @@ class ControladorProveedoresBD extends Controller
      */
     public function edit($id)
     {
-        //
+        $proveedorId = DB::table('proveedores')->where('id_proveedor', $id)->get();
+
+        return view('editar_proveedor', compact('proveedorId'));
     }
 
     /**
@@ -84,9 +86,20 @@ class ControladorProveedoresBD extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidadorRegistroProveedores $request, $id)
     {
-        //
+        DB::table('proveedores')->where('id_proveedor', $id)->update([
+            'empresa' => $request->input('txtEmpresaProveedor'),
+            'direccion' => $request->input('txtDireccionProveedor'),
+            'pais' => $request->input('txtPaisProveedor'),
+            'contacto' => $request->input('txtContactoProveedor'),
+            'no_fijo' => $request->input('txtNoFijoProveedor'),
+            'no_celular' => $request->input('txtNoCelularProveedor'),
+            'correo' => $request->input('txtCorreoProveedor'),
+            'updated_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('proveedor.edit')->with('editado','x');
     }
 
     /**

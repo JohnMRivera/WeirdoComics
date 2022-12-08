@@ -76,7 +76,9 @@ class ControladorComicsBD extends Controller
      */
     public function edit($id)
     {
-        //
+        $comicId = DB::table('comics')->where('id_comic', $id)->get();
+
+        return view('editar_comics', compact('comicId'));
     }
 
     /**
@@ -86,9 +88,22 @@ class ControladorComicsBD extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidadorRegistroComics $request, $id)
     {
-        //
+        $precio_compra = $request->input('txtPrecioCompraComic');
+
+        DB::table('comics')->where('id_comic', $id)->update([
+            'nombre_comic' => $request->input('txtNombreComic'),
+            'edicion' => $request->input('txtEdicionComic'),
+            'compañia' => $request->input('txtCompañiaComic'),
+            'cantidad_comics' => $request->input('txtCantidadComic'),
+            'precio_compra' => $precio_compra,
+            'precio_venta' => $precio_compra * 1.4,
+            'imagen' => $request->input('img'),
+            'updated_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('comic.create')->with('editado','x');
     }
 
     /**

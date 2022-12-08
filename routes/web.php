@@ -8,6 +8,8 @@ use App\Http\Controllers\ControladorArticulosBD;
 use App\Http\Controllers\ControladorProveedoresBD;
 use App\Http\Controllers\ControladorTienda;
 use App\Http\Controllers\ControladorCarritoBD;
+use App\Http\Controllers\ControladorPedidosBD;
+use App\Mail\SolicitudPedidos;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +83,8 @@ Route::controller(ControladorComicsBD::class)->group(function(){
     Route::get('comic','create')->name('comic.create');
     Route::post('comic/store','store')->name('comic.store');
     Route::delete('comic/{id}/destroy','destroy')->name('comic.destroy');
+    Route::get('comic/edit/{id}','edit')->name('comic.edit');
+    Route::put('comic/update/{id}','update')->name('comic.update');
 });
 
 // Articulos
@@ -88,21 +92,25 @@ Route::controller(ControladorArticulosBD::class)->group(function(){
     Route::get('articulo','create')->name('articulo.create');
     Route::post('articulo/store','store')->name('articulo.store');
     Route::delete('articulo/{id}/destroy','destroy')->name('articulo.destroy');
+    Route::get('articulo/edit/{id}','edit')->name('articulo.edit');
+    Route::put('articulo/update/{id}','update')->name('articulo.update');
 });
 
 // Proveedores
 Route::controller(ControladorProveedoresBD::class)->group(function(){
     Route::get('proveedor','create')->name('proveedor.create');
     Route::post('proveedor/store','store')->name('proveedor.store');
-    Route::get('proveedor_index','index')->name('proveedor.index');
-
+    Route::get('proveedor/index/{id_usuario}','index')->name('proveedor.index');
     Route::delete('proveedor/{id}/destroy','destroy')->name('proveedor.destroy');
+    Route::get('proveedor/edit/{id}','edit')->name('proveedor.edit');
+    Route::put('proveedor/update/{id}','update')->name('proveedor.update');
 });
 
 // Tienda
 Route::controller(ControladorTienda::class)->group(function(){
     Route::get('tienda/{id_usuario}/{nombre}/{tipo}','index')->name('tienda.index');
-    Route::post('tienda_create/{id_usuario}','create')->name('tienda.create');
+    Route::post('tienda/create/{id_usuario}','create')->name('tienda.create');
+    Route::post('tienda/reporte/{id_usuario}','generarReporte')->name('tienda.reporte');
 });
 
 // Carrito
@@ -111,6 +119,25 @@ Route::controller(ControladorCarritoBD::class)->group(function(){
     Route::post('tienda_carrito_comic/{id_usuario}/{id_comic}/{cantidadDisponible}','ingresarComic')->name('tienda.comic');
     Route::post('tienda_carrito_articulo/{id_usuario}/{id_articulo}/{cantidadDisponible}','ingresarArticulo')->name('tienda.articulo');
     Route::post('carrito/create/{id_usuario}','create')->name('carrito.create');
+    Route::delete('carrito/destroy/{id_usuario}/{id_carrito}','destroy')->name('carrito.destroy');
+    Route::get('ticket/{id_usuario}', 'pdf')->name('ticket.pdf');
+});
+
+// Pedidos
+Route::controller(ControladorPedidosBD::class)->group(function(){
+    Route::get('pedido/{id_proveedor}/{id_usuario}/{nombre}/{tipo}','create')->name('pedido.create');
+    Route::post('pedido/{id_proveedor}/{id_usuario}','buscar')->name('articulo.buscar');
+    Route::post('pedido/agregar/{id_proveedor}/{id_usuario}/{nombre}/{tipo}','agregar')->name('pedido.agregar');
+    Route::post('pedido/store/{id_proveedor}/{id_usuario}/{nombre}/{tipo}','store')->name('pedido.store');
+    Route::delete('pedido/destroy/{id_proveedor}/{id_usuario}/{nombre}/{tipo}/{id_carrito_pedido}','destroy')->name('pedido.destroy');
 });
 
 // Route::get('proveedor/index',[ControladorProveedoresBD::class, 'index'])->name('proveedor.index');
+
+Route::get('solicitud_pedidos', function(){
+    $correo = new SolicitudPedidos();
+    
+    Mail::to('brian.yunuel.soto.sanchez@gmail.com')->send($correo);
+
+    return "Mensaje enviado";
+});

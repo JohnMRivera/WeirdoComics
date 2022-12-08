@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidadorPedidos extends FormRequest
+class ValidadorReporte extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class ValidadorPedidos extends FormRequest
     public function rules()
     {
         return [
-            'txtTipo' => 'required'
+            'txtFecha' => 'required',
+            'txtTipoReporte' => 'required'
         ];
     }
 }

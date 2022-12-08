@@ -366,7 +366,7 @@ input:hover{
     border-spacing: 0;
     border-collapse: collapse;
     /* height: 100%; */
-    
+    width: 100%;
 }
 
 .carrito-table thead{
@@ -384,4 +384,25 @@ input:hover{
 .carrito-table th,td{
     border: 2px solid black;
     padding: 1%;
+}
+
+.carrito-table tbody tr .btn-eliminar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+}
+
+.carrito-table tbody tr .btn-eliminar button{
+    /* width: 60%; */
+    padding: 5px;
+    background-color: orangered;
+    border-radius: 3px;
+    border: none;
+}
+
+.carrito-table tbody tr .btn-eliminar button img{
+    width: 100%;
+    width: 25px;
 }

@@ -90,6 +90,7 @@ class ControladorVistas extends Controller
 
                 $_SESSION['nombre'] = $dato->nombre_usuario;
                 $_SESSION['id'] = $dato->id_usuario;
+                $_SESSION['rol'] = $dato->rol;
             }
 
             return redirect()->route('ini')->with('ingresado',$correo);

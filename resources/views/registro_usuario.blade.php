@@ -85,7 +85,11 @@
                       </div>
                     @endif
                     <div>
-                        <input name="txtRol" type="text" placeholder="Rol" value="{{ old('txtRol') }}">
+                        <select name="txtRol" id="">
+                          <option value="" disabled selected="">Roles</option>
+                          <option value="Vendedor">Vendedor</option>
+                          <option value="SuperUsuario">SuperUsuario</option>
+                        </select>
                     </div>
                     @if($errors->first('txtRol'))
                       <div class="alert">

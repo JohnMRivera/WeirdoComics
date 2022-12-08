@@ -75,7 +75,9 @@ class ControladorArticulosBD extends Controller
      */
     public function edit($id)
     {
-        //
+        $articuloId = DB::table('articulos')->where('id_articulo', $id)->get();
+
+        return view('editar_articulos', compact('articuloId'));
     }
 
     /**
@@ -85,9 +87,23 @@ class ControladorArticulosBD extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidadorRegistroArticulos $request, $id)
     {
-        //
+        $precio_compra = $request->input('txtPrecioCompraArticulo');
+
+        DB::table('articulos')->where('id_articulo', $id)->update([
+            'nombre_articulo' => $request->input('txtNombreArticulo'),
+            'tipo' => $request->input('txtTipoArticulo'),
+            'marca' => $request->input('txtMarcaArticulo'),
+            'descripcion' => $request->input('txtDescripcionArticulo'),
+            'cantidad_articulos' => $request->input('txtCantidadArticulo'),
+            'precio_compra' => $request->input('txtPrecioCompraArticulo'),
+            'precio_venta' => $request->input('txtPrecioCompraArticulo') * 1.4,
+            'imagen' => $request->input('img'),
+            'updated_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('articulo.create')->with('editado','x');
     }
 
     /**

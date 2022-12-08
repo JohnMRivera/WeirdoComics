@@ -19,6 +19,16 @@
         )
     </script>
 
+@elseif(session()->has('eliminado'))
+
+<script>
+    Swal.fire(
+        'Eliminado!',
+        'El articulo ha sido removido!',
+        'success'
+    )
+</script>
+
 @elseif(session()->has('sin_vender'))
 
     <script>
@@ -32,8 +42,7 @@
 @endif
 
 <div class="cont-carrito">
-    <form class="form-carrito" action="{{ route('carrito.create', $id_usuario) }}" method="post">
-        @csrf
+    <div class="form-carrito">
         <h1 class="h1"><strong>Carrito de ventas</strong></h1>
         <div class="cont-info">
             <label for="exampleDataList" class="form-label">Busca el id del articulo</label>
@@ -55,6 +64,7 @@
                         <th>Tipo</th>
                         <th>Cantidad</th>
                         <th>Fecha</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,6 +75,15 @@
                         <td>{{ $consulta->tipo }}</td>
                         <td>{{ $consulta->cantidad }}</td>
                         <td>{{ $consulta->created_at }}</td>
+                        <td class="btn-eliminar">
+                            <form action=" {{route('carrito.destroy', [$id_usuario, $consulta->id_carrito])}} " method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit">
+                                    <img src="/img/eliminar.png" alt="">
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -76,10 +95,15 @@
                 <label for="">$0</label>
             </div>
             <div>
-                <button type="submit" class="btn btn-success btn-carrito">Comprar</button>
+                <a href="{{route('ticket.pdf', $id_usuario)}}"><button  class="btn btn-primary btn-carrito" >Crear ticket
+                </button><a>
             </div>
+            <form action="{{ route('carrito.create', $id_usuario) }}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-success btn-carrito">Comprar</button>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 
 @stop

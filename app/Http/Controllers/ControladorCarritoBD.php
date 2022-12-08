@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use PDF;
 
 class ControladorCarritoBD extends Controller
 {
@@ -156,7 +157,7 @@ class ControladorCarritoBD extends Controller
             $usuarioId = DB::table('usuarios')->where('id_usuario', $id_usuario)->get();
 
             foreach($usuarioId AS $usuario){
-                $nombre = $usuario->nombre_usuario;
+                $nombre = $usuario->nombre_usuario . ' ' . $usuario->apellido_p . ' ' . $usuario->apellido_m;
             }
 
             DB::table('ventas_mostrador')->insert([
@@ -175,5 +176,53 @@ class ControladorCarritoBD extends Controller
         } else {
             return redirect()->route('carrito.index', $id_usuario)->with('sin_vender','x');
         }
+    }
+
+    public function destroy($id_usuario, $id_carrito){
+        DB::table('carrito')->where('id_carrito', $id_carrito)->delete();
+
+        return redirect()->route('carrito.index', $id_usuario)->with('eliminado','x');
+    }
+
+    public function pdf($id_usuario){
+        $datos = DB::table('carrito')->get();
+
+        $comicN = [];
+        $articuloN = [];
+
+        $comicPrecio = [];
+        $articuloPrecio = [];
+
+        $i = 0;
+        $j = 0;
+        $total = 0;
+        foreach($datos as $dato){
+            if($dato->tipo == "comics"){                               //Este es del carrito
+                $comics = DB::table('comics')->where('id_comic', $dato->id_articulo)->get();
+
+                foreach($comics as $comic){
+                    $comicN[$i] = $comic->nombre_comic;
+                    $comicPrecio[$i] = $comic->precio_venta;
+                    $total += $comic->precio_venta * $dato->cantidad;
+                    $i++;
+                }
+            } else if($dato->tipo == "articulos"){
+                $articulos = DB::table('articulos')->where('id_articulo', $dato->id_articulo)->get();
+
+                foreach($articulos as $articulo){
+                    $articuloN[$j] = $articulo->nombre_articulo;
+                    $articuloPrecio[$j] = $articulo->precio_venta;
+                    $total += $articulo->precio_venta * $dato->cantidad;
+                    $j++;
+                }
+            }
+        }
+        $usuario = DB::table('usuarios')->where('id_usuario', $id_usuario)->get();
+        foreach($usuario as $usuariosN){
+            $nombre = $usuariosN->nombre_usuario;
+        }
+
+        $pdf = PDF::loadView('ticket', ['datos'=>$datos, 'comicN'=>$comicN, 'articuloN'=>$articuloN, 'comicPrecio' => $comicPrecio, 'articuloPrecio' => $articuloPrecio , 'nombre'=>$nombre, 'total' => $total]);
+        return $pdf->download('Ventas.pdf');
     }
 }

@@ -491,16 +491,21 @@ ul {
 }
 
 .header-pedidos{
+    padding: 0 20%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.header-pedidos form{
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
-    height: 55%;
-    padding: 0 20%;
 }
 
 .header-pedidos__titulo{
-    margin: 10px 20%;
-    display: flex;
-    align-items: center;
+    font-size: 18px;
+    margin: 10px 0;
+    /* display: flex; */
+    /* align-items: center; */
     /* justify-content: center; */
     text-align: center;
 }
@@ -520,7 +525,7 @@ ul {
 
 .header-pedidos__buscador input {
     margin: 1px 0 0;
-    width: 90%;
+    width: 100%;
     /* margin: 0 2%; */
     height: 39px;
     padding: 0 10px;
@@ -529,11 +534,21 @@ ul {
     border: 2px solid black;
 }
 
-.header-pedidos__buscador input:hover {
+.header-pedidos__buscador select {
+    margin: 1px 0 0;
+    width: 100%;
+    /* margin: 0 2%; */
+    height: 39px;
+    padding: 0 10px;
+    font-size: 18px;
+    transition: 0.4s;
+    border: 2px solid black;
+}
+
+/* .header-pedidos__buscador input:hover {
     box-shadow: 0 0 3px black;
     width: 92%;
-    /* margin: 0; */
-}
+} */
 
 .header-pedidos__btn{
     /* display: relative; */
@@ -542,6 +557,7 @@ ul {
     float: right;
     /* right: 0; */
     margin: 10px 0;
+    width: 100%;
 }
 
 .header-pedidos__btn input{
@@ -574,9 +590,9 @@ ul {
 .contenido-pedidos{
     display: grid;
     grid-template-rows: 3fr 1fr 12fr 4fr;
-    border: 2px solid black;
+    border: 1px solid black;
     height: calc(100vh - 166px);
-    box-shadow: 0 0 10px rgb(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgb(0, 0, 0, 0.5);
     background: linear-gradient(rgb(240, 240, 240), rgb(245, 245, 245));
     border-radius: 2px;
 }
@@ -598,11 +614,11 @@ ul {
 .c-p__articulos-header{
     display: grid;
     grid-template-columns: 5fr 2fr 2fr 1fr;
-    border: 2px solid black;
-    margin-right: -2px;
-    margin-left: -2px;
+    border: 1px solid black;
+    margin-right: -1px;
+    margin-left: -1px;
     padding: 3px;
-    transform: translateY(2px);
+    transform: translateY(1px);
 }
 
 .c-p__articulos-header label{
@@ -640,8 +656,8 @@ ul {
 .c-p__articulos-datos{
     display: grid;
     grid-template-columns: 5fr 2fr 2fr 1fr;
-    border-top: 3px solid black;
-    border-bottom: 3px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     /* margin: 0 3px; */
     margin-bottom: 4px;
     padding: 3px;
@@ -665,14 +681,19 @@ ul {
     font-family: Arial;
 }
 
-.c-p__articulos-datos a img{
+.c-p__articulos-datos button{
+    background: none;
+    border: none;
+}
+
+.c-p__articulos-datos button img{
     width: 25px;
 }
 
 .contenido-pedidos__footer{
     display: grid;
     grid-template-rows: 1fr 2fr;
-    border-top: 3px solid black;
+    border-top: 1px solid black;
 }
 
 .c-p__footer-total{
@@ -691,7 +712,7 @@ ul {
 }
 
 .c-p__footer-generar{
-    border-top: 3px solid black;
+    border-top: 1px solid black;
     padding: 10px 0;
 }
 
@@ -751,6 +772,75 @@ ul {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
+}
+
+.pedidos-proveedores{
+    border: 1px solid black;
+    box-shadow: 0 0 5px black;
+    background-image: linear-gradient(rgb(240, 240, 240), rgb(245, 245, 245));
+    height: 37vh;
+    padding: 0;
+}
+
+.pedidos-tabla{
+    width: calc(100% + 0.5px);
+    border-collapse: collapse;
+    margin: 0 1px 0 0;
+    font-family: Arial;
+    font-size: 11px;
+    font-weight: bold;
+    transform: translateY(-1px);
+    text-align: center;
+}
+
+.pedidos-tabla thead{
+    background-color: orangered;
+    color: white;
+}
+
+.pedidos-tabla thead tr{
+    border-bottom: 1px solid black;
+    border-top: none;
+}
+
+.pedidos-tabla thead tr th{
+    padding: 5px;
+}
+
+.pedidos-tabla tbody{
+    background-color: linear-gradient(rgb(240, 240, 240), rgb(245, 245, 245));
+    color: gray;
+}
+
+.pedidos-tabla tbody tr{
+    border-bottom: 1px solid black;
+}
+
+.pedidos-tabla tbody tr td{
+    padding: 5px;
+}
+
+.pedidos-tabla .columna-btn__agregar{
+    /* position: relative; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pedidos-tabla .columna-btn__agregar button{
+    background-color: orangered;
+    border-radius: 2px;
+    border: none;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pedidos-tabla .columna-btn__agregar button img{
+    width: 70%;
+    height: 70%;
 }
 
 .alert{
@@ -859,81 +949,21 @@ ul {
     /* border: none; */
     /* outline: 0; */
 }
-/* .datos-login div input {
-    width: 80%;
-    height: 100%;
-    font-size: 20px;
-    border-width: 3px;
-    border-style: solid;
-    border-color: black;
-    border-image: initial;
+
+.datos-login div select{
+    width: 100%;
+    height: 130%;
+    border: 3px solid black;
     padding: 5px 15px;
     margin: 2px;
-    transition: all 0.3s ease 0s;
-} */
-/* .datos-login div{
-    width: 100%;
-    height: 50px;
-    max-width: 400px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
+    transition: 0.3s;
+    font-size: 20px;
+    /* background: none; */
+    /* color: black; */
+    margin: 2px;
+    /* border: none; */
+    /* outline: 0; */
 }
-
-.datos-login div input{
-    width: 100%;
-    height: 100%;
-    background: none;
-    color: black;
-    padding: 10px;
-    border: none;
-    outline: 0;
-}
-
-.datos-login div .lbl-usuario{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 80%;
-    height: 100%;
-    pointer-events: none;
-    border-bottom: 1px solid orangered;
-}
-
-.datos-login div .lbl-usuario:after{
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -1px;
-    width: 80%;
-    height: 100%;
-    border-bottom: 3px solid black;
-    transform: translateX(-120%);
-    transition: all 0.3s ease;
-}
-
-.txt-usuario{
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    transition: all 0.3s ease;
-    color: red;
-    font-family: Arial;
-    font-weight: 600;
-}
-
-.datos-login input:focus + .lbl-usuario .txt-usuario, .datos-login input:valid + .lbl-usuario .txt-usuario{
-    transform: translateY(-150%);
-    font-size: 13px;
-    color: orangered;
-    border: none;
-    padding-left: 5 px;
-} */
-
-
-
-
 /*  */
 
 .datos-login div input:hover{
@@ -1350,6 +1380,14 @@ ul {
     padding: 0 2%;
 }
 
+.c-c__seccion-carta__contenido .btn-añadir{
+    background-color: orangered;
+    border: none;
+    padding: 2px 4px;
+    border-radius: 3px;
+    color: white;
+}
+
 .c-c__s-c__contenido-datos{
     color: silver;
     font-family: Arial;
@@ -1648,7 +1686,7 @@ ul {
 }
 
 .input-reg_pro input{
-    width: 100%;
+    width: calc(100% - 16px);
     border: 2px solid gray;
     background: none;
     position: relative;
@@ -1752,14 +1790,20 @@ ul {
     height: calc(100vh - 80px);
 }
 
+/* .tienda-formularios{
+    height: 80vh;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+} */
+
 .form-tienda{
     margin: 20px 5%;
     /* border: 1px solid gray; */
     box-shadow: 0 0 5px black;
     border-radius: 5px;
     display: grid;
-    grid-template-rows: 1fr 7fr 1fr;
-    height: 80vh;
+    grid-template-rows: 1fr 2fr 1fr;
+    height: 37vh;
     padding: 10px 20px;
     /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); */
     transition: 0.2s;
@@ -1785,9 +1829,9 @@ ul {
 }
 
 .datos-tienda__scroll{
-    height: 65vh;
-    width: 100%;
-    overflow-y: auto;
+    height: 20vh;
+    /* width: 100%;
+    overflow-y: auto; */
 }
 
 .datos-tienda__scroll::-webkit-scrollbar{
@@ -1807,13 +1851,14 @@ ul {
 .datos-tienda{
     display: grid;
     grid-template-rows: 1fr 1fr;
-    padding: 10px 10%;
+    padding: 0 10%;
+    height: 20vh;
 }
 
-.datos-tienda div{
-    display: flex;
+.datos-tienda > div{
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     width: 100%;
     padding: 7px 0;
 }
@@ -1888,6 +1933,14 @@ ul {
     display: grid;
     grid-template-columns: 5fr 1fr;
     padding: 0 2%;
+}
+
+.c-t__seccion-carta__contenido .btn-añadir{
+    background-color: orangered;
+    border: none;
+    padding: 2px 4px;
+    border-radius: 3px;
+    color: white;
 }
 
 .c-t__s-c__contenido-datos{
@@ -1974,4 +2027,78 @@ ul {
     margin: -1px; */
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
     width: 60px;
+}
+
+/* Editar Comic */
+
+.main-editar{
+    background-color: orangered;
+    padding: 0 15%;
+    height: calc(100vh - 80px);
+}
+
+.main-editar form{
+    background-color: rgb(240, 240, 240);
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    box-shadow: 0 0 15px black;
+    height: calc(100vh - 120px);
+    margin: 0 15%;
+    display: grid;
+    grid-template-rows: 1fr 7fr 1fr;
+    padding: 20px 10%;
+}
+
+.main-editar .editar-titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-editar .editar-titulo h1{
+    color: orangered;
+    text-shadow: 3px 3px 0px black;
+    font-family: Arial;
+    font-size: 40px;
+}
+
+.main-editar .editar-inputs{
+    padding: 20px 5%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.main-editar .editar-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-editar .editar-btn button{
+    width: 40%;
+    height: 60%;
+    padding: 3% 0;
+    float: right;
+    margin: 10px 40px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+    background-color: orangered;
+    background-image: linear-gradient(
+        -60deg,
+        transparent, transparent 40%,
+        #ffffff44 40%, #ffffff44 60%,
+        transparent 60%, transparent 100%
+    );
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    background-position-x: 150%;
+    padding-bottom: 25px;
+}
+
+.main-editar .editar-btn button:hover{
+    background-position-x: -150%;
+    transition: background-position-x 600ms;
+    box-shadow: 0 0 5px orangered;
 }
